@@ -1,0 +1,2536 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="artifact-type" content="dashboard">
+  <meta name="design-style" content="terracotta">
+  <title>الخريطة الذهنية التفاعلية الشاملة — الوجيز في فقه العبادات (المذهب المالكي)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Noto+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@1.43.0/dist/umd/lucide.min.js"></script>
+  <style>
+    :root {
+      color-scheme: light;
+
+      /* Page and surfaces (Terracotta style) */
+      --background: #f9f3eb;
+      --surface-container-low: #f3e9dc;
+      --surface-container: #ede0d0;
+      --surface-container-high: #e4d4c0;
+      --surface-elevated: #fdfaf5;
+
+      /* Ink */
+      --on-surface: #261b15;
+      --on-surface-variant: #57483f;
+
+      /* Borders */
+      --outline: #9e8a78;
+      --outline-variant: #dfd0be;
+      --featured-border: #c98a6b;
+      --emerald-border: #b5d6c9;
+      --secondary-btn-border: #c4b29e;
+
+      /* Accents */
+      --primary: #b84a24;
+      --on-primary: #ffffff;
+      --primary-container: #f7ebe0;
+      --on-primary-container: #7d2e12;
+      --secondary: #8f6524;
+      --secondary-container: #f4ebd9;
+      --tertiary: #1d6356;
+      --tertiary-container: #e1efe9;
+      --on-tertiary-container: #13473d;
+      --error: #b82929;
+      --on-error: #ffffff;
+      --error-container: #fae8e8;
+
+      /* Data series */
+      --data-1: #b84a24;
+      --data-2: #1d6356;
+      --data-3: #b5893e;
+      --data-4: #8c3838;
+      --data-5: #4f5d75;
+      --data-context: #a39384;
+
+      /* Semantic */
+      --positive: #1d6356;
+      --warning: #8f6524;
+      --focus: #b84a24;
+
+      /* Fonts */
+      --font-headline: 'Amiri', serif;
+      --font-body: 'Noto Sans Arabic', sans-serif;
+      --font-label: 'Noto Sans Arabic', sans-serif;
+
+      /* Type scale (Dashboard) */
+      --display-size: clamp(1.75rem, 1.35rem + 1.4vw, 2.35rem);
+      --headline-size: clamp(1.25rem, 1.1rem + 0.5vw, 1.5rem);
+      --subhead-size: clamp(1.0625rem, 1rem + 0.25vw, 1.1875rem);
+      --body-size: clamp(0.9375rem, 0.9rem + 0.15vw, 1rem);
+      --label-size: 0.75rem;
+
+      /* Shape */
+      --rounded: 0.375rem;
+      --rounded-lg: 0.75rem;
+      --rounded-arch: 28px 28px 6px 6px;
+      --rounded-full: 9999px;
+
+      /* Effects */
+      --soft-shadow: 0 4px 18px rgb(38 27 21 / 0.04);
+      --soft-shadow-raised: 0 8px 28px rgb(38 27 21 / 0.08);
+      --warm-hairline: 1px solid var(--outline-variant);
+      --brass-gradient: linear-gradient(90deg, var(--outline-variant), var(--data-3), var(--outline-variant));
+
+      /* Spacing scale */
+      --space-xs: 0.25rem;
+      --space-sm: 0.5rem;
+      --space-md: 1rem;
+      --space-lg: 1.5rem;
+      --space-xl: 2.5rem;
+      --space-2xl: 4rem;
+
+      /* Motion */
+      --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+      --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+      --dur-micro: 120ms;
+      --dur-short: 220ms;
+      --dur-long: 420ms;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body {
+      overflow-x: clip;
+      margin: 0;
+      padding: 0;
+      background-color: var(--background);
+      color: var(--on-surface);
+      font-family: var(--font-body);
+      font-size: var(--body-size);
+      line-height: 1.65;
+    }
+    header { position: static !important; }
+
+    button, input, select, textarea {
+      font-family: inherit;
+      font-size: inherit;
+    }
+
+    :focus-visible {
+      outline: 2px solid var(--focus);
+      outline-offset: 2px;
+    }
+
+    .page-grid {
+      display: grid;
+      gap: var(--space-lg);
+      padding: var(--space-lg);
+      max-width: 1440px;
+      margin: 0 auto;
+      overflow: hidden;
+    }
+    .page-grid * { min-width: 0; }
+
+    /* Header / Hero */
+    .hero-header {
+      background: var(--surface-container-low);
+      border: var(--warm-hairline);
+      border-radius: var(--rounded-lg);
+      padding: var(--space-lg) var(--space-xl);
+      box-shadow: var(--soft-shadow);
+    }
+
+    .hero-top-meta {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: var(--space-sm);
+      margin-bottom: var(--space-sm);
+    }
+
+    .kicker-label {
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      font-weight: 700;
+      color: var(--primary);
+      letter-spacing: 0;
+    }
+
+    .badge-emerald {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-xs);
+      background: var(--tertiary-container);
+      color: var(--on-tertiary-container);
+      border: 1px solid var(--emerald-border);
+      padding: var(--space-xs) var(--space-md);
+      border-radius: var(--rounded-full);
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      font-weight: 700;
+      letter-spacing: 0;
+    }
+
+    .hero-title {
+      font-family: var(--font-headline);
+      font-weight: 700;
+      font-size: var(--display-size);
+      line-height: 1.2;
+      margin: 0 0 var(--space-sm) 0;
+      color: var(--on-surface);
+    }
+    .hero-title em {
+      font-style: normal;
+      color: var(--primary);
+      text-decoration: underline;
+      text-decoration-color: var(--data-3);
+      text-underline-offset: 6px;
+    }
+
+    .hero-subtitle {
+      margin: 0;
+      color: var(--on-surface-variant);
+      max-width: 75ch;
+      font-size: var(--body-size);
+    }
+
+    .ornament-rule {
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+      margin-block: var(--space-md);
+      color: var(--secondary);
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      font-weight: 700;
+      letter-spacing: 0;
+    }
+    .ornament-rule::before,
+    .ornament-rule::after {
+      content: "";
+      flex: 1;
+      height: 1px;
+      background: var(--brass-gradient);
+    }
+
+    /* KPI Arch Cards Row */
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(180px, 100%), 1fr));
+      gap: var(--space-md);
+    }
+
+    .arch-card {
+      background: var(--surface-container-low);
+      border: 1px solid var(--outline-variant);
+      border-radius: var(--rounded-arch);
+      padding: var(--space-md) var(--space-md) var(--space-sm);
+      text-align: center;
+      box-shadow: var(--soft-shadow);
+      cursor: pointer;
+      transition: transform var(--dur-short) var(--ease-out), box-shadow var(--dur-short) var(--ease-out), background-color var(--dur-short) var(--ease-out);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: var(--space-xs);
+      width: 100%;
+      color: inherit;
+    }
+    .arch-card:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--soft-shadow-raised);
+    }
+    .arch-card.is-featured,
+    .arch-card[aria-pressed="true"] {
+      background: var(--primary-container);
+      border-color: var(--featured-border);
+    }
+    .arch-card-label {
+      font-size: var(--label-size);
+      font-weight: 700;
+      color: var(--on-surface-variant);
+    }
+    .arch-card-value {
+      font-family: var(--font-headline);
+      font-weight: 700;
+      font-size: clamp(1.35rem, 1.1rem + 0.6vw, 1.75rem);
+      color: var(--on-surface);
+      line-height: 1.2;
+    }
+    .arch-card-caption {
+      font-size: var(--label-size);
+      font-weight: 600;
+      color: var(--tertiary);
+    }
+
+    /* Controls Toolbar */
+    .controls-bar {
+      background: var(--surface-container);
+      border: var(--warm-hairline);
+      border-radius: var(--rounded-lg);
+      padding: var(--space-md);
+      display: grid;
+      grid-template-columns: minmax(220px, 1.4fr) minmax(160px, 0.8fr) auto;
+      gap: var(--space-md);
+      align-items: end;
+    }
+
+    .field-group {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-xs);
+    }
+    .field-label {
+      font-size: var(--label-size);
+      font-weight: 700;
+      color: var(--on-surface-variant);
+    }
+    .input-control,
+    .select-control {
+      background: var(--surface-elevated);
+      border: 1px solid var(--outline-variant);
+      border-radius: var(--rounded);
+      padding: var(--space-sm) var(--space-md);
+      color: var(--on-surface);
+      min-height: 44px;
+      width: 100%;
+      transition: border-color var(--dur-micro) var(--ease-out);
+    }
+    .input-control:focus,
+    .select-control:focus {
+      border-color: var(--primary);
+      outline: none;
+      box-shadow: 0 0 0 2px var(--primary-container);
+    }
+
+    .toolbar-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-sm);
+      align-items: center;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-xs);
+      min-height: 44px;
+      padding: var(--space-sm) var(--space-md);
+      border-radius: var(--rounded-full);
+      font-weight: 600;
+      font-size: var(--body-size);
+      cursor: pointer;
+      border: 1px solid transparent;
+      transition: background-color var(--dur-micro) var(--ease-out), color var(--dur-micro) var(--ease-out), border-color var(--dur-micro) var(--ease-out);
+      white-space: nowrap;
+    }
+    .btn-primary {
+      background: var(--primary);
+      color: var(--on-primary);
+    }
+    .btn-primary:hover {
+      background: var(--on-primary-container);
+    }
+    .btn-secondary {
+      background: var(--surface-elevated);
+      color: var(--on-surface);
+      border-color: var(--secondary-btn-border);
+    }
+    .btn-secondary:hover {
+      background: var(--surface-container-low);
+    }
+    .btn-secondary[aria-pressed="true"] {
+      background: var(--tertiary);
+      color: var(--on-primary);
+      border-color: var(--tertiary);
+    }
+
+    /* Main Workspace Split: Mind Map Canvas + Detail Inspector */
+    .workspace-split {
+      display: grid;
+      grid-template-columns: minmax(0, 1.55fr) minmax(320px, 1fr);
+      gap: var(--space-lg);
+      align-items: start;
+    }
+
+    .panel-card {
+      background: var(--surface-container-low);
+      border: var(--warm-hairline);
+      border-radius: var(--rounded-lg);
+      box-shadow: var(--soft-shadow);
+      overflow: hidden;
+    }
+
+    .panel-header {
+      background: var(--surface-container);
+      border-bottom: var(--warm-hairline);
+      padding: var(--space-md) var(--space-lg);
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: var(--space-sm);
+    }
+
+    .panel-title {
+      font-family: var(--font-headline);
+      font-weight: 700;
+      font-size: var(--headline-size);
+      margin: 0;
+      color: var(--on-surface);
+    }
+
+    .map-controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-xs);
+    }
+
+    .icon-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-xs);
+      min-height: 36px;
+      padding: var(--space-xs) var(--space-sm);
+      border-radius: var(--rounded);
+      border: 1px solid var(--secondary-btn-border);
+      background: var(--surface-elevated);
+      color: var(--on-surface);
+      cursor: pointer;
+      font-size: var(--label-size);
+      font-weight: 600;
+    }
+    .icon-btn:hover {
+      background: var(--primary-container);
+      border-color: var(--primary);
+    }
+
+    /* Interactive Visual Tree Canvas */
+    .mindmap-viewport {
+      position: relative;
+      background: var(--surface-elevated);
+      min-height: 620px;
+      max-height: 760px;
+      overflow: auto;
+      padding: var(--space-lg);
+      cursor: grab;
+    }
+    .mindmap-viewport:active {
+      cursor: grabbing;
+    }
+
+    .tree-root-wrapper {
+      transform-origin: top right;
+      transition: transform var(--dur-short) var(--ease-out);
+      min-width: max-content;
+      padding: var(--space-md);
+    }
+
+    /* Visual Mind Map Tree Nodes (SVG + CSS connectors) */
+    .mind-tree {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-lg);
+    }
+
+    .book-cluster {
+      display: flex;
+      align-items: flex-start;
+      gap: var(--space-lg);
+      padding: var(--space-md);
+      background: var(--surface-container-low);
+      border: var(--warm-hairline);
+      border-radius: var(--rounded-lg);
+      position: relative;
+    }
+
+    .book-hub {
+      min-width: 210px;
+      max-width: 230px;
+      background: var(--primary);
+      color: var(--on-primary);
+      border-radius: var(--rounded-arch);
+      padding: var(--space-md);
+      text-align: center;
+      cursor: pointer;
+      box-shadow: var(--soft-shadow);
+      border: 2px solid transparent;
+      flex-shrink: 0;
+      transition: transform var(--dur-micro) var(--ease-out), box-shadow var(--dur-micro) var(--ease-out);
+    }
+    .book-hub:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--soft-shadow-raised);
+    }
+    .book-hub.is-selected {
+      box-shadow: 0 0 0 3px var(--data-3);
+    }
+    .book-hub.theme-tahara { background: var(--data-2); }
+    .book-hub.theme-salah { background: var(--data-1); }
+    .book-hub.theme-zakah { background: var(--data-3); color: var(--on-surface); }
+    .book-hub.theme-sawm { background: var(--data-4); }
+    .book-hub.theme-hajj { background: var(--data-5); }
+
+    .book-hub-title {
+      font-family: var(--font-headline);
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin: 0 0 var(--space-xs) 0;
+    }
+    .book-hub-meta {
+      font-size: var(--label-size);
+      opacity: 0.92;
+      display: block;
+    }
+
+    .branches-col {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-sm);
+      flex: 1;
+      border-right: 2px solid var(--outline);
+      padding-right: var(--space-md);
+    }
+
+    .branch-row {
+      display: flex;
+      align-items: flex-start;
+      gap: var(--space-md);
+      position: relative;
+    }
+    .branch-row::before {
+      content: "";
+      position: absolute;
+      right: calc(-1 * var(--space-md));
+      top: 1.25rem;
+      width: var(--space-md);
+      height: 2px;
+      background: var(--outline);
+    }
+
+    .chapter-node {
+      min-width: 220px;
+      max-width: 260px;
+      background: var(--surface-elevated);
+      border: 1.5px solid var(--outline-variant);
+      border-right: 4px solid var(--primary);
+      border-radius: var(--rounded);
+      padding: var(--space-sm) var(--space-md);
+      cursor: pointer;
+      text-align: right;
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-xs);
+      flex-shrink: 0;
+      transition: background-color var(--dur-micro) var(--ease-out), border-color var(--dur-micro) var(--ease-out);
+    }
+    .chapter-node:hover {
+      background: var(--primary-container);
+      border-color: var(--primary);
+    }
+    .chapter-node.is-selected {
+      background: var(--primary-container);
+      border-color: var(--primary);
+      box-shadow: var(--soft-shadow);
+    }
+    .chapter-node-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: var(--space-xs);
+    }
+    .chapter-node-title {
+      font-family: var(--font-headline);
+      font-weight: 700;
+      font-size: 1.05rem;
+      color: var(--on-surface);
+    }
+    .chapter-toggle {
+      background: var(--surface-container);
+      border: 1px solid var(--outline-variant);
+      border-radius: var(--rounded);
+      width: 26px;
+      height: 26px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      color: var(--on-surface);
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+    .chapter-node-summary {
+      font-size: var(--label-size);
+      color: var(--on-surface-variant);
+      line-height: 1.4;
+    }
+
+    .leaves-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-xs);
+      align-items: flex-start;
+      padding-right: var(--space-sm);
+      border-right: 1.5px dashed var(--outline-variant);
+    }
+    .leaves-grid[hidden] {
+      display: none;
+    }
+
+    .leaf-chip {
+      background: var(--surface-container-low);
+      border: 1px solid var(--outline-variant);
+      border-radius: var(--rounded);
+      padding: var(--space-xs) var(--space-sm);
+      font-size: var(--label-size);
+      font-weight: 600;
+      color: var(--on-surface);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-xs);
+      min-height: 34px;
+      transition: background-color var(--dur-micro) var(--ease-out), border-color var(--dur-micro) var(--ease-out);
+    }
+    .leaf-chip:hover {
+      background: var(--tertiary-container);
+      border-color: var(--tertiary);
+    }
+    .leaf-chip.is-selected {
+      background: var(--tertiary);
+      color: var(--on-primary);
+      border-color: var(--tertiary);
+    }
+
+    .ruling-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: var(--rounded-full);
+      flex-shrink: 0;
+      display: inline-block;
+    }
+    .dot-fard { background: var(--data-1); }
+    .dot-sunnah { background: var(--data-2); }
+    .dot-mandub { background: var(--data-3); }
+    .dot-makruh { background: var(--data-4); }
+    .dot-usul { background: var(--data-5); }
+
+    /* Detail Inspector Panel */
+    .inspector-panel {
+      position: sticky;
+      top: var(--space-md);
+    }
+    .inspector-body {
+      padding: var(--space-lg);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-md);
+      max-height: 760px;
+      overflow-y: auto;
+    }
+
+    .breadcrumb-trail {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: var(--space-xs);
+      font-size: var(--label-size);
+      color: var(--secondary);
+      font-weight: 700;
+    }
+
+    .detail-heading {
+      font-family: var(--font-headline);
+      font-size: clamp(1.35rem, 1.15rem + 0.6vw, 1.75rem);
+      font-weight: 700;
+      margin: 0;
+      color: var(--on-surface);
+      line-height: 1.25;
+    }
+
+    .tag-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-xs);
+    }
+
+    .fiqh-tag {
+      font-size: var(--label-size);
+      font-weight: 700;
+      padding: 2px 10px;
+      border-radius: var(--rounded-full);
+      border: 1px solid var(--outline-variant);
+      background: var(--surface-container);
+      color: var(--on-surface);
+    }
+    .fiqh-tag.tag-fard { background: var(--primary-container); color: var(--on-primary-container); border-color: var(--featured-border); }
+    .fiqh-tag.tag-sunnah { background: var(--tertiary-container); color: var(--on-tertiary-container); border-color: var(--emerald-border); }
+    .fiqh-tag.tag-makruh { background: var(--error-container); color: var(--error); border-color: var(--error); }
+
+    .detail-block {
+      background: var(--surface-elevated);
+      border: var(--warm-hairline);
+      border-radius: var(--rounded);
+      padding: var(--space-md);
+    }
+    .detail-block-title {
+      font-size: var(--label-size);
+      font-weight: 700;
+      color: var(--primary);
+      margin: 0 0 var(--space-xs) 0;
+      display: flex;
+      align-items: center;
+      gap: var(--space-xs);
+    }
+    .detail-block p {
+      margin: 0;
+      color: var(--on-surface);
+    }
+    .detail-list {
+      margin: 0;
+      padding-right: 1.25rem;
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-xs);
+    }
+
+    .evidence-card {
+      background: var(--secondary-container);
+      border-right: 4px solid var(--data-3);
+      border-radius: var(--rounded);
+      padding: var(--space-md);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-xs);
+    }
+    .evidence-type {
+      font-size: var(--label-size);
+      font-weight: 700;
+      color: var(--secondary);
+    }
+    .evidence-text {
+      font-family: var(--font-headline);
+      font-size: 1.125rem;
+      line-height: 1.7;
+      color: var(--on-surface);
+      margin: 0;
+    }
+    .evidence-ref {
+      font-size: var(--label-size);
+      color: var(--on-surface-variant);
+      font-weight: 600;
+    }
+
+    /* Structured Directory / Comparison Table View */
+    .directory-section {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-md);
+    }
+    .table-wrap {
+      overflow-x: auto;
+      background: var(--surface-elevated);
+      border: var(--warm-hairline);
+      border-radius: var(--rounded-lg);
+    }
+    table.fiqh-table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: right;
+    }
+    .fiqh-table th {
+      background: var(--surface-container);
+      padding: var(--space-sm) var(--space-md);
+      font-size: var(--label-size);
+      font-weight: 700;
+      color: var(--on-surface-variant);
+      border-bottom: 1px solid var(--outline-variant);
+      white-space: nowrap;
+    }
+    .fiqh-table td {
+      padding: var(--space-sm) var(--space-md);
+      border-bottom: 1px solid var(--outline-variant);
+      vertical-align: top;
+      font-size: var(--body-size);
+    }
+    .fiqh-table tr:hover td {
+      background: var(--primary-container);
+      cursor: pointer;
+    }
+
+    .legend-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-md);
+      align-items: center;
+      font-size: var(--label-size);
+      color: var(--on-surface-variant);
+      padding: var(--space-sm) var(--space-md);
+      background: var(--surface-container);
+      border-top: var(--warm-hairline);
+    }
+    .legend-item {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-xs);
+      font-weight: 600;
+    }
+
+    .empty-state {
+      padding: var(--space-xl);
+      text-align: center;
+      color: var(--on-surface-variant);
+    }
+
+    .source-footer {
+      border-top: var(--warm-hairline);
+      padding-top: var(--space-md);
+      color: var(--on-surface-variant);
+      font-size: var(--label-size);
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: var(--space-sm);
+    }
+
+    @media (max-width: 1024px) {
+      .workspace-split {
+        grid-template-columns: 1fr;
+      }
+      .inspector-panel {
+        position: static;
+      }
+      .controls-bar {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .page-grid {
+        padding: var(--space-sm);
+        gap: var(--space-md);
+      }
+      .hero-header {
+        padding: var(--space-md);
+      }
+      .book-cluster {
+        flex-direction: column;
+      }
+      .book-hub {
+        max-width: 100%;
+        width: 100%;
+      }
+      .branch-row {
+        flex-direction: column;
+      }
+      .chapter-node {
+        max-width: 100%;
+        width: 100%;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page-grid">
+    <!-- Hero Header -->
+    <header class="hero-header">
+      <div class="hero-top-meta">
+        <span class="kicker-label">المذهب المالكي • الفقه الميسّر بالأدلة والنصوص</span>
+        <span class="badge-emerald">
+          <i data-lucide="git-fork" width="14" height="14" aria-hidden="true"></i>
+          شجرة معرفية تفاعلية شاملة
+        </span>
+      </div>
+      <h1 class="hero-title">الوجيز في <em>فقه العبادات</em> — الخريطة الذهنية الشاملة</h1>
+      <p class="hero-subtitle">
+        مخطط هيكلي وشجرة معرفية تفاعلية تستوعب أبواب العبادات الخمس في المذهب المالكي من كتاب الطهارة والمياه إلى كتاب الحج والعمرة، مع التعاريف والتقسيمات والفروع الفقهية والأدلة الشرعية من الكتاب والسنة وأصول المذهب.
+      </p>
+      <div class="ornament-rule">◆ أبواب العبادات الخمسة على المشهور في المذهب المالكي ◆</div>
+
+      <!-- KPI Arch Summary Cards -->
+      <div class="kpi-grid" id="kpi-books-grid" role="group" aria-label="تصفية حسب الكتاب الفقهي"></div>
+    </header>
+
+    <!-- Search & Filter Controls -->
+    <section class="controls-bar" aria-label="أدوات البحث والتصفية والعرض">
+      <div class="field-group">
+        <label class="field-label" for="search-input">ابحث في الأبواب، المسائل، التعاريف، أو الأدلة الشرعية</label>
+        <input type="search" id="search-input" class="input-control" placeholder="مثال: المياه، نواقض الوضوء، سجود السهو، نصاب الزكاة، أركان الحج…" oninput="handleSearchInput(this.value)">
+      </div>
+
+      <div class="field-group">
+        <label class="field-label" for="ruling-filter">تصفية حسب الحكم / التصنيف</label>
+        <select id="ruling-filter" class="select-control" onchange="handleRulingFilter(this.value)">
+          <option value="all">جميع المسائل والأحكام</option>
+          <option value="fard">الفرائض والأركان والواجبات</option>
+          <option value="sunnah">السنن المؤكدة والآداب</option>
+          <option value="mandub">المندوبات والمستحبات</option>
+          <option value="makruh">المكروهات والنواقض والمبطلات</option>
+          <option value="usul">التعاريف والأقسام والشروط</option>
+        </select>
+      </div>
+
+      <div class="toolbar-actions">
+        <button type="button" id="btn-view-tree" class="btn btn-secondary" aria-pressed="true" onclick="switchView('tree')">
+          <i data-lucide="network" width="16" height="16" aria-hidden="true"></i>
+          الخريطة الشجرية
+        </button>
+        <button type="button" id="btn-view-table" class="btn btn-secondary" aria-pressed="false" onclick="switchView('table')">
+          <i data-lucide="table-2" width="16" height="16" aria-hidden="true"></i>
+          جدول المسائل والأدلة
+        </button>
+        <button type="button" class="btn btn-primary" onclick="resetAllFilters()">
+          <i data-lucide="rotate-ccw" width="16" height="16" aria-hidden="true"></i>
+          إظهار الكل
+        </button>
+      </div>
+    </section>
+
+    <!-- Main Workspace: Visual Mind Map + Detail Inspector -->
+    <main class="workspace-split">
+      <!-- Left/Right Primary Canvas -->
+      <section class="panel-card" aria-label="منطقة الخريطة الذهنية">
+        <div class="panel-header">
+          <h2 class="panel-title" id="canvas-title">الشجرة المعرفية لأبواب العبادات</h2>
+          <div class="map-controls" id="tree-toolbar">
+            <button type="button" class="icon-btn" onclick="expandAllBranches()" title="توسيع كل الفروع">
+              <i data-lucide="unfold-vertical" width="14" height="14" aria-hidden="true"></i>
+              توسيع الكل
+            </button>
+            <button type="button" class="icon-btn" onclick="collapseAllBranches()" title="طي الفروع">
+              <i data-lucide="fold-vertical" width="14" height="14" aria-hidden="true"></i>
+              طي الكل
+            </button>
+            <button type="button" class="icon-btn" onclick="zoomTree(0.1)" title="تكبير الخريطة">
+              <i data-lucide="zoom-in" width="14" height="14" aria-hidden="true"></i>
+              تكبير
+            </button>
+            <button type="button" class="icon-btn" onclick="zoomTree(-0.1)" title="تصغير الخريطة">
+              <i data-lucide="zoom-out" width="14" height="14" aria-hidden="true"></i>
+              تصغير
+            </button>
+            <button type="button" class="icon-btn" onclick="resetZoom()" title="إعادة ضبط الحجم">
+              <span id="zoom-readout">100%</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Tree View -->
+        <div id="tree-view-container" class="mindmap-viewport">
+          <div id="tree-root" class="tree-root-wrapper"></div>
+        </div>
+
+        <!-- Table View -->
+        <div id="table-view-container" class="directory-section" hidden>
+          <div class="table-wrap">
+            <table class="fiqh-table">
+              <thead>
+                <tr>
+                  <th>الكتاب</th>
+                  <th>الباب</th>
+                  <th>المسألة / الفرع</th>
+                  <th>الحكم الشرعي</th>
+                  <th>الدليل الرئيسي</th>
+                </tr>
+              </thead>
+              <tbody id="table-body"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="legend-bar">
+          <span class="legend-item"><span class="ruling-dot dot-usul"></span> تعاريف وأقسام وشروط</span>
+          <span class="legend-item"><span class="ruling-dot dot-fard"></span> فرائض وأركان</span>
+          <span class="legend-item"><span class="ruling-dot dot-sunnah"></span> سنن</span>
+          <span class="legend-item"><span class="ruling-dot dot-mandub"></span> مندوبات</span>
+          <span class="legend-item"><span class="ruling-dot dot-makruh"></span> نواقض ومبطلات ومكروهات</span>
+        </div>
+      </section>
+
+      <!-- Detail Inspector Sidebar -->
+      <aside class="panel-card inspector-panel" aria-label="تفاصيل المسألة والأدلة الشرعية">
+        <div class="panel-header">
+          <h2 class="panel-title">بطاقة التحقيق والأدلة</h2>
+          <span class="badge-emerald" id="inspector-count-badge">تفصيل فقهي</span>
+        </div>
+        <div class="inspector-body" id="inspector-body"></div>
+      </aside>
+    </main>
+
+    <footer class="source-footer">
+      <span>المصادر المعتمدة: كتاب الوجيز في فقه العبادات (المذهب المالكي)، متن ابن عاشر (المرشد المعين)، مختصر الأخضري، الرسالة لابن أبي زيد القيرواني، ومختصر خليل.</span>
+      <span id="stats-summary">إجمالي الأبواب والمسائل المحملة في الشجرة المعرفية</span>
+    </footer>
+  </div>
+
+  <script>
+    // Complete Maliki Fiqh al-'Ibadat Knowledge Tree Dataset
+    const FIQH_DATA = [
+      {
+        id: `book-tahara`,
+        title: `كتاب الطهارة`,
+        theme: `theme-tahara`,
+        subtitle: `المياه، النجاسات، الوضوء، الغسل، التيمم، والحيض`,
+        overview: `أول أبواب العبادات لأن الطهارة شرط لصحة الصلاة؛ وهي في المذهب المالكي تنقسم إلى طهارة حدث (كبرى بالماء أو التيمم، وصغرى بالوضوء) وطهارة خبث (إزالة النجاسة عن الثوب والبدن والمكان).`,
+        chapters: [
+          {
+            id: `ch-water`,
+            title: `باب أحكام المياه`,
+            summary: `أقسام المياه الثلاثة عند المالكية وأحكام كل قسم`,
+            nodes: [
+              {
+                id: `water-def`,
+                title: `تعريف الطهارة وأقسام المياه`,
+                ruling: `usul`,
+                rulingLabel: `أصول وتعاريف`,
+                definition: `الطهارة شرعًا: صفة حكمية توجب لموصوفها استباحة الصلاة به أو فيه أو له. وينقسم الماء عند المالكية في المشهور إلى ثلاثة أقسام: طهور، وطاهر، ونجس.`,
+                divisions: [
+                  `الماء الطهور (المطلق): الباقي على أصل خلقته، يصح به رفع الحدث وإزالة الخبث؛ ويدخل فيه ماء السماء والبحر والأنهار والآبار والعيون والثلج والبرد.`,
+                  `الماء الطاهر غير المطهر: ما تغير أحد أوصافه (لونه أو طعمه أو ريحه) بمخالطة طاهر لا ينفك عنه غالبًا، أو تغير بغيره كالورد والزعفران والصابون؛ يُستعمل في العادات دون العبادات.`,
+                  `الماء النجس: ما حلت فيه نجاسة فغيرت أحد أوصافه الثلاثة (اللون أو الطعم أو الريح) قلّ الماء أو كثر؛ ولا يطهر إلا بزوال التغير بمكث أو إضافة مطلق.`
+                ],
+                evidences: [
+                  {
+                    type: `القرآن الكريم`,
+                    text: `﴿وَأَنزَلْنَا مِنَ السَّمَاءِ مَاءً طَهُورًا﴾`,
+                    ref: `سورة الفرقان: آية ٤٨`
+                  },
+                  {
+                    type: `السنة النبوية`,
+                    text: `عن أبي هريرة رضي الله عنه في ماء البحر: «هو الطهور ماؤه الحل ميتته»`,
+                    ref: `أخرجه مالك في الموطأ وأصحاب السنن`
+                  },
+                  {
+                    type: `السنة النبوية`,
+                    text: `حديث أبي سعيد الخدري رضي الله عنه: «إن الماء طهور لا ينجسه شيء»`,
+                    ref: `أخرجه أبو داود والترمذي والنسائي — والمراد ما لم يتغير أحد أوصافه`
+                  }
+                ]
+              },
+              {
+                id: `water-asrar`,
+                title: `أحكام الأسآر والمستعمل`,
+                ruling: `usul`,
+                rulingLabel: `تفريع فقهي`,
+                definition: `السؤر: بقية شرب الآدمي أو الحيوان. والماء المستعمل في رفع الحدث طهور عند المالكية في المشهور لكنه مكروه مع وجود غيره إذا كان يسيرًا.`,
+                divisions: [
+                  `سؤر الآدمي (مسلمًا أو كافرًا) وبهيمة الأنعام والسباع والهرة: طهور ما لم تكن في فمه نجاسة متحققة.`,
+                  `سؤر الكلب: طاهر على الراجح عند المالكية ويُكره استعماله مع وجود غيره، ويغسل الإناء من ولوغه سبعًا تعبدًا.`,
+                  `الماء القليل الذي شرب منه شارب الخمر أو نحوها: يُكره إن شك في نجاسة فمه.`
+                ],
+                evidences: [
+                  {
+                    type: `السنة النبوية`,
+                    text: `حديث كبشة بنت كعب أن أبا قتادة قال: قال رسول الله ﷺ في الهرة: «إنها ليست بنجس، إنما هي من الطوافين عليكم والطوافات»`,
+                    ref: `أخرجه مالك في الموطأ وأبو داود والترمذي`
+                  },
+                  {
+                    type: `السنة النبوية`,
+                    text: `حديث أبي هريرة: «إذا ولغ الكلب في إناء أحدكم فليغسله سبع مرات»`,
+                    ref: `متفق عليه — وحمله المالكية على التعبد لا على نجاسة عينه`
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            id: `ch-najasah`,
+            title: `باب النجاسات وإزالتها`,
+            summary: `الأعيان النجسة والمعفو عنها وكيفية التطهير`,
+            nodes: [
+              {
+                id: `naj-types`,
+                title: `الأعيان النجسة والطاهرة`,
+                ruling: `usul`,
+                rulingLabel: `تقسيمات`,
+                definition: `النجاسة (الخبث): صفة حكمية توجب منع الصلاة بها أو فيها. والأصل في الأشياء الطهارة حتى يقوم دليل النجاسة.`,
+                divisions: [
+                  `الميتة (غير البحري وما لا نفس له سائلة) والدم المسفوح ولحم الخنزير.`,
+                  `الخمر والمسكر المائع، والقيء المتغير عن الطعام إلى حموضة أو نتن.`,
+                  `بول الآدمي وغائطه وروث وبول غير مأكول اللحم؛ أما روث وبول مأكول اللحم (كالغنم والبقر والإبل) فطاهر في المشهور ما لم يتغذّ بنجس.`,
+                  `المذي والودي والمني: كلها نجسة عند المالكية؛ ويكفي في المني اليابس الفرك؟ بل يجب غسله عند المالكية كغيره.`
+                ],
+                evidences: [
+                  {
+                    type: `القرآن الكريم`,
+                    text: `﴿قُل لَّا أَجِدُ فِي مَا أُوحِيَ إِلَيَّ مُحَرَّمًا عَلَىٰ طَاعِمٍ يَطْعَمُهُ إِلَّا أَن يَكُونَ مَيْتَةً أَوْ دَمًا مَّسْفُوحًا أَوْ لَحْمَ خِنزِيرٍ فَإِنَّهُ رِجْسٌ﴾`,
+                    ref: `سورة الأنعام: آية ١٤٥`
+                  },
+                  {
+                    type: `القرآن الكريم`,
+                    text: `﴿وَثِيَابَكَ فَطَهِّرْ﴾`,
+                    ref: `سورة المدثر: آية ٤`
+                  }
+                ]
+              },
+              {
+                id: `naj-removal`,
+                title: `حكم إزالة النجاسة والمعفو عنه`,
+                ruling: `fard`,
+                rulingLabel: `شرط وجوب مع الذكر والقدرة`,
+                definition: `إزالة النجاسة عن ثوب المصلي وبدنه ومكانه واجبة عند المالكية بشرط الذكر والقدرة (في المشهور)، فمن صلى بنجاسة ناسيًا أو عاجزًا أعاد في الوقت استحبابًا.`,
+                divisions: [
+                  `ما يُعفى عنه لعسر الاحتراز: يسير الدم والقيح دون الدرهم البغلي، وأثر الدمل، وبلل البواسير، وطين الشوارع ما لم تغلب النجاسة، وذرق الطيور، وما يصيب الجزار والمرأة المرضعة مع التحفظ.`,
+                  `تُزال النجاسة بالماء المطلق حتى تزول عينها وأثرها، ويكفي في بول الرضيع الذكر غير الآكل للطعام النضح؟ لا، بل يُغسل عند المالكية كغيره، وخُفف في ثوب المرضعة.`
+                ],
+                evidences: [
+                  {
+                    type: `السنة النبوية`,
+                    text: `قوله ﷺ لأسماء بنت أبي بكر في دم الحيض يصيب الثوب: «تحته ثم تقرصه بالماء ثم تنضحه ثم تصلي فيه»`,
+                    ref: `متفق عليه`
+                  },
+                  {
+                    type: `السنة النبوية`,
+                    text: `أمر النبي ﷺ بصب ذنوب من ماء على بول الأعرابي في المسجد`,
+                    ref: `متفق عليه`
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            id: `ch-fitrah`,
+            title: `باب قضاء الحاجة وسنن الفطرة`,
+            summary: `الاستنجاء والاستجمار وآداب الخلاء والسنن الفطرية`,
+            nodes: [
+              {
+                id: `fitrah-istinja`,
+                title: `الاستنجاء والاستجمار وآداب الخلاء`,
+                ruling: `fard`,
+                rulingLabel: `واجب لإزالة الخبث`,
+                definition: `الاستنجاء: إزالة ما خرج من السبيلين بالماء، والاستجمار: إزالته بالأحجار ونحوها مما ينقي ولا يضر ولا يكون محترمًا أو عظمًا أو روثًا.`,
+                divisions: [
+                  `الجمع بين الماء والحجر أفضل، ويجزئ أحدهما؛ ويشترط في الاستجمار الإنقاء بثلاث مسحات فأكثر ولو بحجر ذي شعب.`,
+                  `آداب الخلاء: التسمية والاستعاذة قبل الدخول، تقديم الرجل اليسرى دخولًا واليمنى خروجًا، عدم استقبال القبلة أو استدبارها في الفضاء، والاستتار عن الأنظار، واجتناب البول في الماء الراكد والطريق والظل.`
+                ],
+                evidences: [
+                  {
+                    type: `السنة النبوية`,
+                    text: `حديث سلمان الفارسي: «نهانا رسول الله ﷺ أن نستقبل القبلة بغائط أو بول، أو أن نستنجي باليمين، أو أن نستنجي بأقل من ثلاثة أحجار، أو أن نستنجي برجيع أو بعظم»`,
+                    ref: `رواه مسلم`
+                  },
+                  {
+                    type: `السنة النبوية`,
+                    text: `حديث أنس: «كان النبي ﷺ إذا دخل الخلاء قال: اللهم إني أعوذ بك من الخبث والخبائث»`,
+                    ref: `متفق عليه`
+                  }
+                ]
+              },
+              {
+                id: `fitrah-sunan`,
+                title: `سنن الفطرة`,
+                ruling: `sunnah`,
+                rulingLabel: `سنن وآداب`,
+                definition: `الخصال التي فطر الله الخلق على استحسانها والاتصاف بها لتكميل النظافة والمظهر الإسلامي.`,
+                divisions: [
+                  `السواك (مؤكد عند الوضوء والصلاة وتغير الفم)، الختان (سنة مؤكدة للذكور)، الاستحداد (حلق العانة)، نتف الإبط، تقليم الأظافر، قص الشارب وإعفاء اللحية.`
+                ],
+                evidences: [
+                  {
+                    type: `السنة النبوية`,
+                    text: `حديث عائشة: «عشر من الفطرة: قص الشارب، وإعفاء اللحية، والسواك، واستنشاق الماء، وقص الأظفار، وغسل البراجم، ونتف الإبط، وحلق العانة، وانتقاص الماء»`,
+                    ref: `رواه مسلم`
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            id: `ch-wudu`,
+            title: `باب الوضوء`,
+            summary: `فرائض الوضوء السبعة، سننه الثماني، فضائله، مكروهاته، ونواقضه`,
+            nodes: [
+              {
+                id: `wudu-faraid`,
+                title: `فرائض الوضوء السبعة`,
+                ruling: `fard`,
+                rulingLabel: `فرائض (أركان)`,
+                definition: `الوضوء في اللغة من الوضاءة وهي الحسن والنظافة؛ وشرعًا: طهارة مائية تتعلق بأعضاء مخصوصة على وجه مخصوص بنية. وفرائضه عند المالكية سبعة:`,
+                divisions: [
+                  `١. النية: قصد استباحة الصلاة أو رفع الحدث، ومحلها القلب وتقترن بأول مغسول من الوجه.`,
+                  `٢. غسل الوجه: من منابت شعر الرأس المعتاد إلى منتهى الذقن طولًا، وما بين وتدي الأذنين عرضًا، مع تخليل الشعر الخفيف.`,
+                  `٣. غسل اليدين إلى المرفقين: مع إدخال المرفقين وتخليل الأصابع.`,
+                  `٤. مسح جميع الرأس: من منابت الشعر إلى نقرة القفا (ويُرد المسح سنة).`,
+                  `٥. غسل الرجلين إلى الكعبين: وهما العظمان الناتئان عند مفصل الساق والقدم.`,
+                  `٦. الفور (الموالاة): غسل الأعضاء متتابعة بلا تفريق طويل مع الذكر والقدرة.`,
+                  `٧. الدلك: إمرار اليد على العضو أثناء الغسل أو بعده قبل جفافه (من خصائص المذهب المالكي).`
+                ],
+                evidences: [
+                  {
+                    type: `القرآن الكريم`,
+                    text: `﴿يَا أَيُّهَا الَّذِينَ آمَنُوا إِذَا قُمْتُمْ إِلَى الصَّلَاةِ فَاغْسِلُوا وُجُوهَكُمْ وَأَيْدِيَكُمْ إِلَى الْمَرَافِقِ وَامْسَحُوا بِرُءُوسِكُمْ وَأَرْجُلَكُمْ إِلَى الْكَعْبَيْنِ﴾`,
+                    ref: `سورة المائدة: آية ٦`
+                  },
+                  {
+                    type: `السنة النبوية`,
+                    text: `حديث عمر بن الخطاب رضي الله عنه: «إنما الأعمال بالنيات، وإنما لكل امرئ ما نوى»`,
+                    ref: `متفق عليه`
+                  }
+                ]
+              },
+              {
+                id: `wudu-sunan`,
+                title: `سنن الوضوء وفضائله ومكروهاته`,
+                ruling: `sunnah`,
+                rulingLabel: `سنن ومندوبات`,
+                definition: `السنن ما واظب عليه النبي ﷺ وأظهره في جماعة، والفضائل (المندوبات) ما دون ذلك في التأكيد.`,
+                divisions: [
+                  `السنن الثماني: غسل اليدين إلى الكوعين أولًا، المضمضة، الاستنشاق، الاستنثار، رد مسح الرأس، مسح الأذنين ظاهرهما وباطنهما بماء جديد، وترتيب الفرائض.`,
+                  `الفضائل: التسمية، الطهارة في موضع طاهر، تقليل الماء، التيامن، الغسلتان والثانية والثالثة في المغسولات، السواك، والذكر بعده.`,
+                  `المكروهات: الإسراف في الماء، الكلام بغير ذكر الله، الزيادة على ثلاث غسلات، والوضوء في موضع نجس.`
+                ],
+                evidences: [
+                  {
+                    type: `السنة النبوية`,
+                    text: `حديث عثمان بن عفان رضي الله عنه في صفة وضوء النبي ﷺ وفيه: «من توضأ نحو وضوئي هذا ثم صلى ركعتين لا يحدث فيهما نفسه غفر له ما تقدم من ذنبه»`,
+                    ref: `متفق عليه`
+                  }
+                ]
+              },
+              {
+                id: `wudu-nawaqid`,
+                title: `نواقض الوضوء (الأحداث والأسباب)`,
+                ruling: `makruh`,
+                rulingLabel: `نواقض الوضوء`,
+                definition: `جمعها المالكية في ثلاثة أقسام: أحداث، وأسباب، وما ليس بحدث ولا سبب (الشك والردة).`,
+                divisions: [
+                  `الأحداث (الخارج المعتاد من أحد السبيلين): البول، الغائط، الريح، المذي، الودي، والمني (يوجب الغسل).`,
+                  `الأسباب (المظان المفضية للحدث): زوال العقل (النوم الثقيل، الإغماء، السكر، الجنون)، مس الذكر المتصل بباطن الكف أو باطن الأصابع، واللمس بقصد اللذة أو وجودها على المشهور.`,
+                  `غير الحدث والسبب: الردة عن الإسلام (عياذًا بالله)، والشك في الحدث بعد تحقق الطهارة (ينقض الوضوء عند المالكية في المشهور خلافًا للجمهور احتياطًا للصلاة إلا للموسوس).`
+                ],
+                evidences: [
+                  {
+                    type: `السنة النبوية`,
+                    text: `حديث بسرة بنت صفوان: «من مس ذكره فليتوضأ»`,
+                    ref: `رواه مالك في الموطأ وأصحاب السنن`
+                  },
+                  {
+                    type: `القرآن الكريم`,
+                    text: `﴿أَوْ جَاءَ أَحَدٌ مِّنكُم مِّنَ الْغَائِطِ أَوْ لَامَسْتُمُ النِّسَاءَ﴾`,
+                    ref: `سورة النساء: آية ٤٣`
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            id: `ch-mash`,
+            title: `باب المسح على الخفين والجبيرة`,
+            summary: `شروط الخف والجوارب وصفة المسح وأحكام الجبيرة`,
+            nodes: [
+              {
+                id: `mash-khuff`,
+                title: `المسح على الخفين والجبيرة`,
+                ruling: `mandub`,
+                rulingLabel: `رخصة شرعية`,
+                definition: `رخصة في إمرار اليد المبلولة بالماء على الخفين بدلًا من غسل الرجلين في الوضوء (لا في الغسل)، ولا توقيت للمسح على الخفين عند المالكية ما لم يخلعهما أو تصبه جنابة، ويُندب نزعهما كل جمعة.`,
+                divisions: [
+                  `شروط الخف: أن يكون من جلد طاهر، مخرزًا (مخيطًا)، ساترًا لمحل الفرض (فوق الكعبين)، يمكن تتابع المشي فيه عادة، وأن يُلبس على طهارة مائية كاملة بغير تيمم.`,
+                  `صفة المسح: يمسح أعلاه وأسفله ندبًا (والمفروض مسح أعلاه عند بعضهم والأظهر مسح الظاهر والباطن).`,
+                  `المسح على الجبيرة: واجب عند تعذر الغسل أو خوف الضرر؛ يمسح عليها كلها ولا يشترط لبسها على طهارة ولا تتقيد بمدة وتجزئ في الغسل والوضوء.`
+                ],
+                evidences: [
+                  {
+                    type: `السنة النبوية`,
+                    text: `حديث المغيرة بن شعبة: أهويت لأنزع خفيه فقال ﷺ: «دعهما فإني أدخلتهما طاهرتين» فمسح عليهما`,
+                    ref: `متفق عليه`
+                  },
+                  {
+                    type: `السنة النبوية`,
+                    text: `حديث أم سلمة وزوجات النبي ﷺ وأمر النبي ﷺ بالمسح على العصائب والتساخين`,
+                    ref: `أخرجه أبو داود`
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            id: `ch-ghusl`,
+            title: `باب الغسل`,
+            summary: `موجبات الغسل، فرائضه الخمس، سننه، وفضائله`,
+            nodes: [
+              {
+                id: `ghusl-rules`,
+                title: `موجبات الغسل وفرائضه وسننه`,
+                ruling: `fard`,
+                rulingLabel: `فريضة كبرى`,
+                definition: `الغسل تعميم البدن بالماء الطهور على وجه مخصوص بنية رفع الحدث الأكبر. وموجباته خمسة: خروج المني بلذة معتادة، التقاء الختانين (تغييب الحشفة)، انقطاع الحيض، انقطاع النفاس، وإسلام الكافر.`,
+                divisions: [
+                  `فرائض الغسل خمسة: ١- النية، ٢- الفور (الموالاة)، ٣- الدلك (ولو بخرقة أو استعانة)، ٤- تعميم ظاهر الجسد بالماء، ٥- تخليل الشعر وإيصال الماء لأصوله وضغط الضفائر دون نقضها إلا إن اشتد ضفرها.`,
+                  `سننه أربع: غسل اليدين أولًا، المضمضة، الاستنشاق، ومسح صماخي الأذنين.`,
+                  `مندوباته: البدء بإزالة الأذى، ثم الوضوء كاملًا (ويجوز تأخير غسل الرجلين)، التثليث للرأس، والبدء بالشق الأيمن فالأيسر والأعلى فالأسفل.`
+                ],
+                evidences: [
+                  {
+                    type: `القرآن الكريم`,
+                    text: `﴿وَإِن كُنتُمْ جُنُبًا فَاطَّهَّرُوا﴾`,
+                    ref: `سورة المائدة: آية ٦`
+                  },
+                  {
+                    type: `السنة النبوية`,
+                    text: `حديث عائشة وميمونة رضي الله عنهما في صفة غسل النبي ﷺ من الجنابة`,
+                    ref: `متفق عليه`
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            id: `ch-tayammum`,
+            title: `باب التيمم`,
+            summary: `أسباب التيمم، فرائضه، سننه، شروطه، ومبطلاته`,
+            nodes: [
+              {
+                id: `tayammum-rules`,
+                title: `أحكام التيمم وفرائضه`,
+                ruling: `fard`,
+                rulingLabel: `بدل اضطراري`,
+                definition: `التيمم: طهارة ترابية تشتمل على مسح الوجه واليدين بنية استباحة الصلاة عند فقد الماء حقيقة أو حكمًا (بمرض أو خوف ضرر أو فوات وقت).`,
+                divisions: [
+                  `فرائضه أربعة: ١- النية (استباحة الصلاة، ولا يرفع الحدث بل يبيح)، ٢- الصعيد الطاهر (كل ما صعد على وجه الأرض من تراب وحجر ورمل وثلج غير محترق)، ٣- مسح الوجه واليدين إلى الكوعين (والسنة مسحهما إلى المرفقين)، ٤- الضربة الأولى والموالاة.`,
+                  `سننه: مسح ما بين الكوعين والمرفقين، الضربة الثانية لليدين، والترتيب.`,
+                  `أحكامه: لا يُتيمم قبل دخول الوقت، ولا تُصلى به فريضتان بل لكل فرض تيمم جديد، وتُصلى به النوافل تبعًا للفرض. ويبطل بوجود الماء قبل الشروع في الصلاة وبنواقض الوضوء.`
+                ],
+                evidences: [
+                  {
+                    type: `القرآن الكريم`,
+                    text: `﴿فَلَمْ تَجِدُوا مَاءً فَتَيَمَّمُوا صَعِيدًا طَيِّبًا فَامْسَحُوا بِوُجُوهِكُمْ وَأَيْدِيكُم مِّنْهُ﴾`,
+                    ref: `سورة المائدة: آية ٦`
+                  },
+                  {
+                    type: `السنة النبوية`,
+                    text: `حديث جابر: «جُعلت لي الأرض مسجدًا وطهورًا»`,
+                    ref: `متفق عليه`
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            id: `ch-hayd`,
+            title: `باب الحيض والنفاس والاستحاضة`,
+            summary: `مدد الحيض والنفاس وأحكام الحائض والنفساء والمستحاضة`,
+            nodes: [
+              {
+                id: `hayd-rules`,
+                title: `أحكام الحيض والنفاس والاستحاضة`,
+                ruling: `usul`,
+                rulingLabel: `أحكام خاصة بالنساء`,
+                definition: `الحيض: دم يرخيه رحم بالغة لا لولادة ولا لمرض. والنفاس: الدم الخارج بسبب الولادة. والاستحاضة: دم علة ومرض في غير أوان الحيض والنفاس أو زائدًا على أكثرهما.`,
+                divisions: [
+                  `مدد الحيض: لا حد لأقله في العبادة (ويوم للعدة)، وأكثره للمبتدأة ١٥ يومًا، وللمعتادة عادتها وتستظهر بثلاثة أيام ما لم تجاوز ١٥ يومًا، وأقل الطهر بين الحيضتين ١٥ يومًا.`,
+                  `أكثر النفاس: ستون يومًا، فإذا انقطع قبلها اغتسلت وصلت، ولا حد لأقله.`,
+                  `ما يمنعه الحيض والنفاس: الصلاة (ولا تقضيها)، الصوم (وتقضيه)، دخول المسجد، مس المصحف وحمله، الطواف، والوطء في الفرج.`,
+                  `المستحاضة: تصلي وتصوم وتغسل محل الأذى وتتوضأ لكل صلاة إن لم يلازمها الدم، وإن لازمها فلا ينقض.`
+                ],
+                evidences: [
+                  {
+                    type: `القرآن الكريم`,
+                    text: `﴿وَيَسْأَلُونَكَ عَنِ الْمَحِيضِ ۖ قُلْ هُوَ أَذًى فَاعْتَزِلُوا النِّسَاءَ فِي الْمَحِيضِ﴾`,
+                    ref: `سورة البقرة: آية ٢٢٢`
+                  },
+                  {
+                    type: `السنة النبوية`,
+                    text: `حديث عائشة في المستحاضة (فاطمة بنت أبي حبيش): «إنما ذلك عرق وليس بالحيضة، فإذا أقبلت الحيضة فدعي الصلاة، وإذا أدبرت فاغسلي عنك الدم وصلي»`,
+                    ref: `متفق عليه`
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        id: `book-salah`,
+        title: `كتاب الصلاة`,
+        theme: `theme-salah`,
+        subtitle: `الأوقات، الأذان، الشروط، الفرائض، السنن، السهو، الجماعة، الجمعة، والصلوات الخاصة`,
+        overview: `أعظم أركان الإسلام بعد الشهادتين، وأهم أبواب العبادات تفصيلًا في المذهب المالكي؛ وتشمل الصلوات الخمس المفروضة، وشروط وجوبها وصحتها، وأركانها الأربعة عشر، وسننها، وأحكام الجماعة والقصر والجمع والجنائز.`,
+        chapters: [
+          {
+            id: `ch-times`,
+            title: `باب المواقيت والأذان والإقامة`,
+            summary: `الأوقات المختارة والضرورية للصلوات الخمس وأحكام الأذان`,
+            nodes: [
+              {
+                id: `salah-times`,
+                title: `مواقيت الصلاة المختارة والضرورية`,
+                ruling: `usul`,
+                rulingLabel: `شروط ومواقيت`,
+                definition: `لكل صلاة من الصلوات الخمس وقت اختياري يأثم بتأخيرها عنه بلا عذر، ووقت ضروري لأصحاب الأعذار (كالحائض تطهر والمغمى عليه يفيق).`,
+                divisions: [
+                  `الظهر: المختار من زوال الشمس إلى آخر القامة؛ والضروري إلى الغروب.`,
+                  `العصر: المختار من آخر القامة إلى اصفرار الشمس؛ والضروري إلى الغروب.`,
+                  `المغرب: وقته مضيق بقدر فعلها بشروطها بعد الغروب؛ والضروري إلى الفجر.`,
+                  `العشاء: المختار من غيبوبة الشفق الأحمر إلى ثلث الليل الأول؛ والضروري إلى طلوع الفجر.`,
+                  `الصبح: المختار من الفجر الصادق إلى الإسفار الأعلى؛ والضروري إلى طلوع الشمس.`
+                ],
+                evidences: [
+                  {
+                    type: `القرآن الكريم`,
+                    text: `﴿إِنَّ الصَّلَاةَ كَانَتْ عَلَى الْمُؤْمِنِينَ كِتَابًا مَّوْقُوتًا﴾`,
+                    ref: `سورة النساء: آية ١٠٣`
+                  },
+                  {
+                    type: `السنة النبوية`,
+                    text: `حديث عبد الله بن عمرو رضي الله عنهما في تحديد أوقات الصلوات الخمس`,
+                    ref: `رواه مسلم`
+                  }
+                ]
+              },
+              {
+                id: `salah-adhan`,
+                title: `الأذان والإقامة`,
+                ruling: `sunnah`,
+                rulingLabel: `سنة كفاية مؤكدة`,
+                definition: `الأذان إعلام بدخول وقت الصلاة بألفاظ مخصوصة، والإقامة إعلام بالقيام إلى الصلاة. وهو مثنى مثنى عند المالكية مع الترجيع (النطق بالشهادتين سرًا ثم جهرًا) والتثويب في الصبح (الصلاة خير من النوم)، والإقامة وترًا (فرادى) إلا «قد قامت الصلاة» فمرة واحدة على المشهور.`,
+                divisions: [
+                  `حكمه: سنة مؤكدة في المساجد والجماعات الطالبة لغيرها، ومندوب للمنفرد في السفر.`,
+                  `شروطه: دخول الوقت (إلا الصبح فيجوز قبله بسدس الليل الأخير)، العقل، الذكورة، الترتيب والموالاة، والعربية.`
+                ],
+                evidences: [
+                  {
+                    type: `السنة النبوية`,
+                    text: `حديث أبي محذورة في تعليم النبي ﷺ له الأذان مثنى مثنى مع الترجيع`,
+                    ref: `رواه مسلم`
+                  },
+                  {
+                    type: `السنة النبوية`,
+                    text: `حديث مالك بن الحويرث: «إذا حضرت الصلاة فليؤذن لكم أحدكم وليؤمكم أكبركم»`,
+                    ref: `متفق عليه`
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            id: `ch-conditions`,
+            title: `باب شروط الصلاة`,
+            summary: `شروط الوجوب وشروط الصحة وأحكام العورة والقبلة`,
+            nodes: [
+              {
+                id: `salah-shurut`,
+                title: `شروط الوجوب وشروط الصحة`,
+                ruling: `usul`,
+                rulingLabel: `شروط`,
+                definition: `الشرط ما يتوقف عليه وجود الشيء وهو خارج عن ماهيته. وتنقسم شروط الصلاة إلى شروط وجوب وشروط صحة.`,
+                divisions: [
+                  `شروط الوجوب: البلوغ، العقل، دخول الوقت، عدم الإكراه، الخلو من الحيض والنفاس، والنوم والغفلة (مع وجوب القضاء بعد الانتباه).`,
+                  `شروط الصحة: ١- طهارة الحدثين، ٢- طهارة الخبث (مع الذكر والقدرة)، ٣- ستر العورة (للرجل من السرة إلى الركبة، وللحرة جميع جسدها إلا الوجه والكفين، وتُعيد في الوقت إذا كُشف الصدر والأطراف)، ٤- استقبال القبلة (عينها للمعاين وجهتها للغائب)، ٥- ترك الكلام والأكل والشرب والفعل الكثير.`
+                ],
+                evidences: [
+                  {
+                    type: `القرآن الكريم`,
+                    text: `﴿فَوَلِّ وَجْهَكَ شَطْرَ الْمَسْجِدِ الْحَرَامِ﴾`,
+                    ref: `سورة البقرة: آية ١٤٤`
+                  },
+                  {
+                    type: `السنة النبوية`,
+                    text: `حديث: «لا يقبل الله صلاة بغير طهور» وحديث: «لا يقبل الله صلاة حائض إلا بخمار»`,
+                    ref: `رواه مسلم وأصحاب السنن`
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            id: `ch-pillars`,
+            title: `باب فرائض الصلاة وسننها ومندوباتها`,
+            summary: `الفرائض الأربعة عشر، السنن المؤكدة، المندوبات، والمكروهات`,
+            nodes: [
+              {
+                id: `salah-faraid`,
+                title: `فرائض الصلاة الأربعة عشر (الأركان)`,
+                ruling: `fard`,
+                rulingLabel: `فرائض لا تسقط`,
+                definition: `الفرائض أجزاء الصلاة الداخلة في ماهيتها والتي لا تصح الصلاة إلا بها ولا يجبرها سجود السهو:`,
+                divisions: [
+                  `١. نية الصلاة المعينة (مقترنة بتكبيرة الإحرام).`,
+                  `٢. تكبيرة الإحرام («الله أكبر» باللسان).`,
+                  `٣. القيام لتكبيرة الإحرام في الفرض.`,
+                  `٤. قراءة الفاتحة (للمنفرد والإمام دون المأموم في الجهرية وتُندب في السرية).`,
+                  `٥. القيام لقراءة الفاتحة.`,
+                  `٦. الركوع.`,
+                  `٧. الرفع من الركوع.`,
+                  `٨. السجود على الأعضاء السبعة (الجبهة والأنف على الأرض واليدين والركبتين وأطراف القدمين).`,
+                  `٩. الرفع من السجود والجلوس بين السجدتين.`,
+                  `١٠. الجلوس للسلام (بقدر النطق بالسلام).`,
+                  `١١. السلام («السلام عليكم» مرة واحدة).`,
+                  `١٢. الطمأنينة (استقرار الأعضاء زمنًا ما في كل ركن).`,
+                  `١٣. الاعتدال (الاستواء قائمًا وجالسًا).`,
+                  `١٤. ترتيب الأركان (مع نية اقتداء المأموم بإمامه).`
+                ],
+                evidences: [
+                  {
+                    type: `السنة النبوية`,
+                    text: `حديث المسيء صلاته: «إذا قمت إلى الصلاة فكبر، ثم اقرأ ما تيسر معك من القرآن، ثم اركع حتى تطمئن راكعًا، ثم ارفع حتى تعتدل قائمًا، ثم اسجد حتى تطمئن ساجدًا، ثم ارفع حتى تطمئن جالسًا...»`,
+                    ref: `متفق عليه`
+                  },
+                  {
+                    type: `السنة النبوية`,
+                    text: `حديث عبادة بن الصامت: «لا صلاة لمن لم يقرأ بفاتحة الكتاب»`,
+                    ref: `متفق عليه`
+                  }
+                ]
+              },
+              {
+                id: `salah-sunan`,
+                title: `سنن الصلاة ومندوباتها`,
+                ruling: `sunnah`,
+                rulingLabel: `سنن ومندوبات`,
+                definition: `السنن ما يترتب على تركه سهوًا سجود السهو (إذا كانت مؤكدة)، والمندوبات هيئات مكملة للخشوع لا سجود فيها.`,
+                divisions: [
+                  `السنن المؤكدة الثماني: قراءة سورة بعد الفاتحة في الأولى والثانية، القيام لها، الجهر في محله (الصبح والأوليين من المغرب والعشاء)، السر في محله، قول «سمع الله لمن حمده» للإمام والمنفرد، التشهد الأول، التشهد الثاني، والجلوس لهما.`,
+                  `بقية السنن: كل تكبيرة غير الإحرام، الصلاة على النبي ﷺ في التشهد الأخير، التسليمة الثانية للمقتدي والمنفرد عند وجود من يسلم عليه، السترة للإمام والمنفرد.`,
+                  `المندوبات: رفع اليدين عند الإحرام حذو المنكبين، إرسال اليدين (وهو المشهور في المذهب في الفرض وقيل بجواز القبض في النفل والفرض)، التأمين سرًا، التطويل في الصبح والظهر، والتوسط في العشاء، وتقصير العصر والمغرب، والدعاء بعد التشهد الأخير.`
+                ],
+                evidences: [
+                  {
+                    type: `السنة النبوية`,
+                    text: `حديث أبي هريرة وابن مسعود في التشهد، وحديث أبي قتادة في قراءة النبي ﷺ في الظهر والعصر والصبح`,
+                    ref: `متفق عليه`
+                  }
+                ]
+              },
+              {
+                id: `salah-nullifiers`,
+                title: `مبطلات الصلاة ومكروهاتها`,
+                ruling: `makruh`,
+                rulingLabel: `مبطلات ومكروهات`,
+                definition: `الأفعال أو التركيات التي تقطع صحة الصلاة وتوجب إعادتها، أو تنقص أجرها دون إبطالها.`,
+                divisions: [
+                  `المبطلات: تعمد ترك ركن أو شرط مع القدرة، الكلام عمدًا لغير إصلاح الصلاة، الضحك (القهقهة تبطل ولو سهوًا)، الأكل والشرب عمدًا، الحدث، الفعل الكثير المتوالي، زيادة ركعة عمدًا أو سجدة عمدًا، والالتفات بالبدن عن القبلة.`,
+                  `المكروهات: الالتفات بالوجه لغير حاجة، العبث، تشبيك الأصابع، التخصر، تغميض العينين لغير حاجة، الصلاة بحضرة طعام تتوق إليه النفس أو مع مدافعة الأخبثين، وقراءة القرآن في الركوع والسجود.`
+                ],
+                evidences: [
+                  {
+                    type: `السنة النبوية`,
+                    text: `حديث زيد بن أرقم: «كنا نتكلم في الصلاة... حتى نزلت: ﴿وَقُومُوا لِلَّهِ قَانِتِينَ﴾ فأمرنا بالسكوت ونهينا عن الكلام»`,
+                    ref: `متفق عليه`
+                  },
+                  {
+                    type: `السنة النبوية`,
+                    text: `حديث عائشة: «لا صلاة بحضرة طعام ولا وهو يدافعه الأخبثان»`,
+                    ref: `رواه مسلم`
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            id: `ch-sahw`,
+            title: `باب سجود السهو وقضاء الفوائت`,
+            summary: `القاعدة المالكية في السجود القبلي والبعدي، وأحكام قضاء الفوائت`,
+            nodes: [
+              {
+                id: `salah-sahw`,
+                title: `سجود السهو (القبلي والبعدي)`,
+                ruling: `sunnah`,
+                rulingLabel: `سنة مؤكدة لجبر الخلل`,
+                definition: `سجدتان يسجدهما المصلي جبرًا لخلل وقع في الصلاة سهوًا بزيادة أو نقصان أو شك؛ والقاعدة عند المالكية واضحة منضبطة:`,
+                divisions: [
+                  `السجود القبلي (قبل السلام): يُشرع عند النقص (ترك سنتين فأكثر أو سنة مؤكدة كالتشهد الأول أو الجلوس له أو سورة أو جهر أو سر)، أو عند اجتماع الزيادة والنقص معًا (تغليبًا للنقص).`,
+                  `السجود البعدي (بعد السلام): يُشرع عند الزيادة المحضة (مثل زيادة ركعة أو سجدة أو كلام سهوًا أو تسليم قبل التمام ثم البناء).`,
+                  `تنبيهات مهمة: من ترك ركنًا لم يجزئه السهو بل يرجع للإتيان به، ومن سها خلف إمام فإن الإمام يحمل سهو المأموم، وإن نسي السجود القبلي حتى سلم سجد بعد السلام إن قرب الوقت وإلا بطلت الصلاة إذا كان لنقص ثلاث سنن.`
+                ],
+                evidences: [
+                  {
+                    type: `السنة النبوية`,
+                    text: `حديث عبد الله بن بحينة: «أن النبي ﷺ صلى بهم الظهر فقام في الركعتين الأوليين لم يجلس... فلما قضى الصلاة سجد سجدتين وكبر في كل سجدة وهو جالس قبل أن يسلم»`,
+                    ref: `متفق عليه — أصل السجود القبلي للنقص`
+                  },
+                  {
+                    type: `السنة النبوية`,
+                    text: `حديث ذي اليدين وأبي هريرة وابن مسعود في سجود النبي ﷺ بعد السلام للزيادة`,
+                    ref: `متفق عليه — أصل السجود البعدي للزيادة`
+                  }
+                ]
+              },
+              {
+                id: `salah-qada`,
+                title: `قضاء الفوائت`,
+                ruling: `fard`,
+                rulingLabel: `واجب على الفور`,
+                definition: `يجب قضاء الصلوات الفائتة فورًا على الترتيب في اليسيرة (خمس صلوات فأقل)، وتُصلى في كل وقت حتى أوقات النهي دون تنفل عند كثرتها لتبرأ الذمة.`,
+                divisions: [
+                  `يسير الفوائت (٥ صلوات فأقل): يجب تقديمها على الحاضرة وإن خرج وقت الحاضرة في الأصح.`,
+                  `كثير الفوائت: يصلي الحاضرة أولًا ثم يقضي ما استطاع كل يوم ولا يتنفل إلا الفجر والوتر والعيدين.`
+                ],
+                evidences: [
+                  {
+                    type: `السنة النبوية`,
+                    text: `حديث أنس بن مالك: «من نسي صلاة فليصلها إذا ذكرها، لا كفارة لها إلا ذلك»`,
+                    ref: `متفق عليه`
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            id: `ch-jamaah`,
+            title: `باب صلاة الجماعة والإمامة والسفر`,
+            summary: `حكم الجماعة، شروط الإمام، أحكام المسبوق، والقصر والجمع`,
+            nodes: [
+              {
+                id: `jamaah-rules`,
+                title: `صلاة الجماعة وشروط الإمام وأحكام المسبوق`,
+                ruling: `sunnah`,
+                rulingLabel: `سنة مؤكدة`,
+                definition: `صلاة الجماعة سنة مؤكدة في الفرائض للرجال القادرين (وللمرأة صلاتها في بيتها أفضل إلا لخشية فوات فضيلة المسجد بشرط الستر وعدم التطيب).`,
+                divisions: [
+                  `شروط الإمام: الإسلام، البلوغ، العقل، الذكورة، العلم بما تصح به الصلاة، السلامة من العيوب المانعة كالحدث الدائم والعجز عن ركن (فلا يؤم المريض الأصحاء).`,
+                  `أحكام المسبوق: يُدرك الركعة بإدراك الركوع مع الإمام، ويقضي ما فاته بعد سلام الإمام بانيًا في الأفعال وقاضيًا في الأقوال (فيجعل ما أدركه أول صلاته في الأقوال، وآخرها في الأفعال على تفصيل المالكية).`
+                ],
+                evidences: [
+                  {
+                    type: `السنة النبوية`,
+                    text: `حديث ابن عمر: «صلاة الجماعة تفضل صلاة الفذ بسبع وعشرين درجة»`,
+                    ref: `متفق عليه`
+                  },
+                  {
+                    type: `السنة النبوية`,
+                    text: `حديث أبي هريرة: «إذا جئتم إلى الصلاة ونحن سجود فاسجدوا ولا تعدوها شيئًا، ومن أدرك الركعة فقد أدرك الصلاة»`,
+                    ref: `رواه أبو داود`
+                  }
+                ]
+              },
+              {
+                id: `travel-prayer`,
+                title: `قصر الصلاة والجمع`,
+                ruling: `sunnah`,
+                rulingLabel: `سنة مؤكدة في السفر`,
+                definition: `القصر: رد الرباعية (الظهر، العصر، العشاء) إلى ركعتين في السفر المباح الذي تبلغ مسافته أربعة برد (حوالي ٨٠–٨٥ كم تقريبًا).`,
+                divisions: [
+                  `شروط القصر: سفر مباح لا لمعصية، بلوغ مسافة القصر، مجاوزة بيوت البلد وبساتينها المتصلة، ونية القصر عند الإحرام، وألا ينوي إقامة أربعة أيام صحاح (عشرين صلاة) في بلد الوصول.`,
+                  `الجمع بين الصلاتين: يجوز الجمع بين الظهر والعصر، والمغرب والعشاء، في السفر (إن جد به السير أو خاف مشقة)، وفي المطر والطين الشديد في المسجد بين المغرب والعشاء خاصة، وللمريض الذي يخشى الإغماء أو يشق عليه إفراد كل صلاة، وفي عرفة ومزدلفة نسكًا.`
+                ],
+                evidences: [
+                  {
+                    type: `القرآن الكريم`,
+                    text: `﴿وَإِذَا ضَرَبْتُمْ فِي الْأَرْضِ فَلَيْسَ عَلَيْكُمْ جُنَاحٌ أَن تَقْصُرُوا مِنَ الصَّلَاةِ﴾`,
+                    ref: `سورة النساء: آية ١٠١`
+                  },
+                  {
+                    type: `السنة النبوية`,
+                    text: `حديث ابن عباس: «كان رسول الله ﷺ يجمع بين صلاة الظهر والعصر إذا كان على ظهر سير، ويجمع بين المغرب والعشاء»`,
+                    ref: `رواه البخاري`
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            id: `ch-jumuah`,
+            title: `باب الجمعة والعيدين والكسوف والاستسقاء`,
+            summary: `شروط الجمعة وخطبتاها، صلاة العيدين، الكسوف، الاستسقاء، والتطوع`,
+            nodes: [
+              {
+                id: `jumuah-rules`,
+                title: `صلاة الجمعة وأركانها`,
+                ruling: `fard`,
+                rulingLabel: `فرض عين على المكلفين`,
+                definition: `صلاة ركعتين جهرًا في وقت الظهر يوم الجمعة تسبقهما خطبتان في جامع مبني وسط استيطان.`,
+                divisions: [
+                  `شروط الوجوب: الذكورة، الحرية، البلوغ، العقل، الإقامة (الاستيطان أو قرب البلد بنحو فرسخ — ٣ أميال)، والسلامة من الأعذار كالمرض والتمريض والخوف.`,
+                  `شروط الصحة: الوقت (من الزوال)، الاستيطان، الجامع المبني، الخطبتان قبلهما، والجماعة (اثنا عشر رجلًا مستوطنًا غير الإمام تبقّوا إلى تمام الصلاة).`,
+                  `آدابها: الغسل (واجب في الفضل أو سنة مؤكدة)، التطيب، لبس أحسن الثياب، التبكير، الإنصات التام للخطيب (يحرم الكلام أثناء الخطبة)، وقراءة سورة الكهف.`
+                ],
+                evidences: [
+                  {
+                    type: `القرآن الكريم`,
+                    text: `﴿يَا أَيُّهَا الَّذِينَ آمَنُوا إِذَا نُودِيَ لِلصَّلَاةِ مِن يَوْمِ الْجُمُعَةِ فَاسْعَوْا إِلَىٰ ذِكْرِ اللَّهِ وَذَرُوا الْبَيْعَ﴾`,
+                    ref: `سورة الجمعة: آية ٩`
+                  }
+                ]
+              },
+              {
+                id: `eid-kusuf-istisqa`,
+                title: `العيدان والكسوف والاستسقاء والوتر والنوافل`,
+                ruling: `sunnah`,
+                rulingLabel: `سنن مؤكدة ورغائب`,
+                definition: `صلوات سنّها رسول الله ﷺ في المناسبات والظواهر الكونية أو كأوراد يومية.`,
+                divisions: [
+                  `العيدان (الفطر والأضحى): سنة مؤكدة؛ ركعتان بلا أذان ولا إقامة، يكبر في الأولى سبعًا بإحرامه وفي الثانية خمسًا بعد تكبيرة القيام، وتليهما خطبتان.`,
+                  `الكسوف والخسوف: الكسوف (الشمس) سنة مؤكدة ركعتان في كل ركعة قيامان وركوعان وسجدتان في المسجد، والخسوف (القمر) مندوب ركعتين عاديتين سرًا في البيت.`,
+                  `الاستسقاء: سنة مؤكدة عند الجدب، ركعتان جهرًا كصلاة العيد بلا تكبيرات زائدة، مع خطبتين وقلب الرداء والدعاء.`,
+                  `الوتر والفجر: الوتر سنة مؤكدة (ركعة واحدة بعد شفع)، ورغيبة الفجر (ركعتان خفيفتان قبل الصبح بالفاتحة فقط ندبًا)، والرواتب والضحى والقيام والتراويح (٢٠ ركعة غير الشفع والوتر).`
+                ],
+                evidences: [
+                  {
+                    type: `السنة النبوية`,
+                    text: `حديث عائشة في صلاة الكسوف: «إن الشمس والقمر آيتان من آيات الله لا يخسفان لموت أحد ولا لحياته، فإذا رأيتم ذلك فادعوا الله وكبروا وصلوا وتصدقوا»`,
+                    ref: `متفق عليه`
+                  },
+                  {
+                    type: `السنة النبوية`,
+                    text: `حديث عائشة في رغيبة الفجر: «ركعتا الفجر خير من الدنيا وما فيها»`,
+                    ref: `رواه مسلم`
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            id: `ch-janazah`,
+            title: `باب الجنائز`,
+            summary: `تغسيل الميت، تكفينه، الصلاة عليه، وحمله ودفنه`,
+            nodes: [
+              {
+                id: `janazah-rules`,
+                title: `أحكام الجنائز الأربعة (فرض كفاية)`,
+                ruling: `fard`,
+                rulingLabel: `فرض كفاية`,
+                definition: `المطلوب من المسلمين تجاه المسلم إذا مات أربعة فروض كفائية: الغسل، التكفين، الصلاة، والدفن (إلا شهيد المعركة فلا يُغسل ولا يُصلى عليه في المشهور بل يُدفن بثيابه).`,
+                divisions: [
+                  `التغسيل: مثل غسل الجنابة بالماء والسدر، ويُندب وترًا (٣ أو ٥ أو ٧) وفي الأخيرة كافور.`,
+                  `التكفين: ستر جميع البدن في ثوب طاهر غير حرير للرجال (المستحب في الرجل ثلاث لفائف بيض، وفي المرأة خمسة).`,
+                  `الصلاة على الميت: أركانها خمسة: ١- النية، ٢- أربع تكبيرات، ٣- الدعاء للميت بين التكبيرات، ٤- القيام، ٥- السلام (تسليمة واحدة). ولا قراءة للفاتحة في المشهور عند المالكية، بل يُحمد الله ويُصلى على النبي ﷺ ويُدعى للميت.`,
+                  `الدفن: اللحد أفضل في الأرض الصلبة، والشق في الرخوة، ويُوضع على شقه الأيمن مستقبل القبلة، ويُكره البناء على القبر وتجصيصه والجلوس عليه.`
+                ],
+                evidences: [
+                  {
+                    type: `السنة النبوية`,
+                    text: `حديث أم عطية رضي الله عنها في غسل ابنة النبي ﷺ: «اغسلنها ثلاثًا أو خمسًا أو أكثر من ذلك بماء وسدر واجعلن في الآخرة كافورًا»`,
+                    ref: `متفق عليه`
+                  },
+                  {
+                    type: `السنة النبوية`,
+                    text: `حديث أبي هريرة في تكبير النبي ﷺ على النجاشي أربعًا`,
+                    ref: `متفق عليه`
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        id: `book-zakah`,
+        title: `كتاب الزكاة`,
+        theme: `theme-zakah`,
+        subtitle: `زكاة النقدين، الأنعام، الحبوب والثمار، الركاز والمعدن، وزكاة الفطر`,
+        overview: `الركن الثالث من أركان الإسلام، وهي عبادة مالية ذات شروط دقيقة في المذهب المالكي تشمل زكاة المال وزكاة الفطر، وتُصرف في الأصناف الثمانية المنصوص عليها في القرآن الكريم.`,
+        chapters: [
+          {
+            id: `ch-zakah-conditions`,
+            title: `باب شروط الزكاة وزكاة النقدين والتجارة`,
+            summary: `شروط الوجوب والصحة، نصاب الذهب والفضة، وعروض التجارة`,
+            nodes: [
+              {
+                id: `zakah-shurut`,
+                title: `تعريف الزكاة وشروطها`,
+                ruling: `fard`,
+                rulingLabel: `ركن مالي`,
+                definition: `الزكاة: إخراج جزء مخصوص من مال مخصوص بلغ نصابًا لمستحقيه بشروط مخصوصة عند تمام الحول أو الحصاد.`,
+                divisions: [
+                  `شروط الوجوب: ١- الحرية، ٢- الإسلام (في الأموال)، ٣- الملك التام، ٤- بلوغ النصاب، ٥- تمام الحول القمري (في النقدين والأنعام وعروض التجارة، دون الحرث والمعدن والركاز)، ٦- الخلو من الدين الذي ينقص النصاب في العين دون الحرث والماشية، ٧- مجيء الساعي في الماشية إن وُجد.`,
+                  `شروط الصحة: النية عند الدفع أو العزل، عدم التقديم قبل الوجوب إلا بيسير في العين (شهر)، ودفعها للمستحقين من الأصناف الثمانية.`
+                ],
+                evidences: [
+                  {
+                    type: `القرآن الكريم`,
+                    text: `﴿خُذْ مِنْ أَمْوَالِهِمْ صَدَقَةً تُطَهِّرُهُمْ وَتُزَكِّيهِم بِهَا﴾`,
+                    ref: `سورة التوبة: آية ١٠٣`
+                  },
+                  {
+                    type: `السنة النبوية`,
+                    text: `حديث ابن عمر: «لا زكاة في مال حتى يحول عليه الحول»`,
+                    ref: `أخرجه الترمذي وابن ماجه`
+                  }
+                ]
+              },
+              {
+                id: `zakah-money`,
+                title: `زكاة النقدين وعروض التجارة والمعدن والركاز`,
+                ruling: `fard`,
+                rulingLabel: `ربع العشر (٢.٥٪)`,
+                definition: `تجب الزكاة في الذهب والفضة والأوراق النقدية التي تقوم مقامهما، وفي عروض التجارة المعدة للبيع.`,
+                divisions: [
+                  `نصاب الذهب: عشرون دينارًا (مثقالًا) = ٨٥ جرامًا من الذهب الخالص (عيار ٢٤)؛ والواجب ربع العشر (٢.٥٪).`,
+                  `نصاب الفضة: مائتا درهم = ٥٩٥ جرامًا من الفضة الخالصة؛ ويُضم الذهب للفضة والأوراق النقدية لتكميل النصاب، والواجب ربع العشر (٢.٥٪).`,
+                  `عروض التجارة: يُقوّم التاجر المدير بضاعته كل حول ويضيف إليها ما بيده من نقد وما له من دين مرجو السداد ويزكي المجموع ربع العشر (٢.٥٪)؛ أما المحتكر (المتربص بالأسواق) فيزكي عند البيع لعام واحد.`,
+                  `المعدن: يزكى ربع العشر فور استخراجه إن بلغ نصابًا؛ والركاز (دفين الجاهلية): فيه الخُمس (٢٠٪) قليلًا كان أو كثيرًا.`
+                ],
+                evidences: [
+                  {
+                    type: `السنة النبوية`,
+                    text: `حديث علي رضي الله عنه: «ليس عليك شيء يعني في الذهب حتى يكون لك عشرون دينارًا، فإذا كانت لك عشرون دينارًا وحال عليها الحول ففيها نصف دينار»`,
+                    ref: `أخرجه أبو داود`
+                  },
+                  {
+                    type: `السنة النبوية`,
+                    text: `حديث أبي هريرة: «وفي الركاز الخمس»`,
+                    ref: `متفق عليه`
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            id: `ch-zakah-crops`,
+            title: `باب زكاة الحبوب والثمار والأنعام`,
+            summary: `أصناف الحبوب والعشرين صنفًا وأنصبة الإبل والبقر والغنم`,
+            nodes: [
+              {
+                id: `zakah-crops`,
+                title: `زكاة الحبوب والثمار (العشر ونصفه)`,
+                ruling: `fard`,
+                rulingLabel: `واجب عند الحصاد`,
+                definition: `تجب في عشرين صنفًا عند المالكية: سبعة من الحبوب والقطاني (القمح والشعير والسلت، والذرة والدخن والأرز، والعلس والقطاني السبعة)، وثلاثة من ذوات الزيوت (الزيتون، السمسم، حب الفجل الأحمر، والقرطم)، وثمرتين (التمر والزبيب). ولا تجب في الخضر والفواكه الطرية.`,
+                divisions: [
+                  `النصاب: خمسة أوسق = ٦٥٣ كجم تقريبًا بعد الجفاف والتصفية (أو ما يعادل ٣٠٠ صاع نبوي).`,
+                  `المقدار الواجب: العشر (١٠٪) فيما سُقي بغير كلفة (كالمطر والعيون)، ونصف العشر (٥٪) فيما سُقي بكلفة وآلة، وثلاثة أرباع العشر (٧.٥٪) فيما سُقي بهما معًا.`
+                ],
+                evidences: [
+                  {
+                    type: `القرآن الكريم`,
+                    text: `﴿وَآتُوا حَقَّهُ يَوْمَ حَصَادِهِ﴾`,
+                    ref: `سورة الأنعام: آية ١٤١`
+                  },
+                  {
+                    type: `السنة النبوية`,
+                    text: `حديث ابن عمر: «فيما سقت السماء والعيون أو كان عثريًا العشر، وما سقي بالنضح نصف العشر» وحديث: «ليس فيما دون خمسة أوسق صدقة»`,
+                    ref: `متفق عليه`
+                  }
+                ]
+              },
+              {
+                id: `zakah-cattle`,
+                title: `زكاة بهيمة الأنعام (الإبل والبقر والغنم)`,
+                ruling: `fard`,
+                rulingLabel: `مقدرة بالنصب الشرعية`,
+                definition: `تجب الزكاة في النعم (الإبل والبقر والغنم) بشروط الزكاة، ولو كانت معلوفة أكثر السنة أو عاملة في المشهور عند المالكية (خلافًا لاشتراط السوم عند الجمهور).`,
+                divisions: [
+                  `الإبل: يبدأ النصاب من ٥ (فيها شاة)، ١٠ (شاتان)، ١٥ (٣ شياه)، ٢٠ (٤ شياه)، ٢٥ (بنت مخاض)، ٣٦ (بنت لبون)، ٤٦ (حقة)، ٦١ (جذعة)، ٧٦ (بنتا لبون)، ٩١ (حقتان)، ١٢١ (٣ بنات لبون أو حقتان ثم في كل ٤٠ بنت لبون وفي كل ٥٠ حقة).`,
+                  `البقر: يبدأ من ٣٠ (تبيع أو تبيعة)، ٤٠ (مسنة)، ٦٠ (تبيعان)، ثم في كل ٣٠ تبيع وفي كل ٤٠ مسنة.`,
+                  `الغنم: يبدأ من ٤٠ إلى ١٢٠ (شاة)، ١٢١ إلى ٢٠٠ (شاتان)، ٢٠١ إلى ٣٩٩ (٣ شياه)، ٤٠٠ (٤ شياه ثم في كل مائة شاة).`
+                ],
+                evidences: [
+                  {
+                    type: `السنة النبوية`,
+                    text: `كتاب أبي بكر الصديق رضي الله عنه الذي كتبه لأنس في فرائض الصدقة التي فرضها رسول الله ﷺ`,
+                    ref: `رواه البخاري`
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            id: `ch-zakah-fitr-masarif`,
+            title: `باب زكاة الفطر ومصارف الزكاة`,
+            summary: `أحكام صدقة الفطر والأصناف الثمانية`,
+            nodes: [
+              {
+                id: `zakah-fitr`,
+                title: `زكاة الفطر ومصارف الزكاة الثمانية`,
+                ruling: `fard`,
+                rulingLabel: `فريضة بدنية مالية`,
+                definition: `زكاة الفطر: صاع من غالب قوت أهل البلد واجب على كل مسلم قادر عن نفسه وعمن تلزمه نفقته، وتجب بغروب شمس آخر يوم من رمضان (أو بطلوع فجر العيد قولان مشهوران).`,
+                divisions: [
+                  `مقدارها: صاع نبوي (أربعة أمداد بمد النبي ﷺ، نحو ٢.٥ كجم من القمح أو التمر أو الأرز ونحوه)، ولا يجزئ إخراج القيمة في المشهور عند المالكية.`,
+                  `مصارف الزكاة الثمانية: ١- الفقراء، ٢- المساكين، ٣- العاملون عليها، ٤- المؤلفة قلوبهم، ٥- في الرقاب، ٦- الغارمون، ٧- في سبيل الله (الجهاد)، ٨- ابن السبيل. ولا تُعطى لكافر ولا هاشمي ولا لمن تلزم المزكي نفقته (كالأبوين والأولاد الصغار والزوجة).`
+                ],
+                evidences: [
+                  {
+                    type: `القرآن الكريم`,
+                    text: `﴿إِنَّمَا الصَّدَقَاتُ لِلْفُقَرَاءِ وَالْمَسَاكِينِ وَالْعَامِلِينَ عَلَيْهَا وَالْمُؤَلَّفَةِ قُلُوبُهُمْ وَفِي الرِّقَابِ وَالْغَارِمِينَ وَفِي سَبِيلِ اللَّهِ وَابْنِ السَّبِيلِ﴾`,
+                    ref: `سورة التوبة: آية ٦٠`
+                  },
+                  {
+                    type: `السنة النبوية`,
+                    text: `حديث ابن عمر: «فرض رسول الله ﷺ زكاة الفطر صاعًا من تمر أو صاعًا من شعير على العبد والحر والذكر والأنثى والصغير والكبير من المسلمين»`,
+                    ref: `متفق عليه`
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        id: `book-sawm`,
+        title: `كتاب الصيام والاعتكاف`,
+        theme: `theme-sawm`,
+        subtitle: `ثبوت الشهر، الأركان، الأعذار، المفسدات، الكفارة، والاعتكاف`,
+        overview: `الركن الرابع من أركان الإسلام؛ وهو الإمساك عن شهوتي البطن والفرج من طلوع الفجر الصادق إلى غروب الشمس بنية التقرب إلى الله، مع تفصيل أحكام القضاء والكفارة الكبرى في المذهب المالكي.`,
+        chapters: [
+          {
+            id: `ch-sawm-pillars`,
+            title: `باب ثبوت رمضان وأركان الصيام وسننه`,
+            summary: `طرق ثبوت الهلال، ركنا الصيام، والمستحبات`,
+            nodes: [
+              {
+                id: `sawm-ruyah`,
+                title: `ثبوت الشهر وأركان الصيام وآدابه`,
+                ruling: `fard`,
+                rulingLabel: `أركان وشروط`,
+                definition: `يثبت دخول رمضان بأحد أمرين: كمال شعبان ثلاثين يومًا، أو رؤية الهلال برؤية عدلين فأكثر (أو مستفيضة، أو واحد لخاصة نفسه).`,
+                divisions: [
+                  `ركنا الصيام: ١- النية (تُبيّت ليلًا، وتكفي نية واحدة لصوم رمضان كله عند المالكية ما لم ينقطع بسفر أو مرض أو حيض فيجددها)، ٢- الإمساك عن المفطرات من طلوع الفجر الصادق إلى غروب الشمس.`,
+                  `سننه ومندوباته: تعجيل الفطر إذا تحقق الغروب، الفطر على رطب أو تمر أو ماء، تأخير السحور، كف اللسان والجوارح عن اللغو والرفث، والإكثار من تلاوة القرآن والصدقة.`
+                ],
+                evidences: [
+                  {
+                    type: `القرآن الكريم`,
+                    text: `﴿فَمَن شَهِدَ مِنكُمُ الشَّهْرَ فَلْيَصُمْهُ﴾ و﴿وَكُلُوا وَاشْرَبُوا حَتَّىٰ يَتَبَيَّنَ لَكُمُ الْخَيْطُ الْأَبْيَضُ مِنَ الْخَيْطِ الْأَسْوَدِ مِنَ الْفَجْرِ ثُمَّ أَتِمُّوا الصِّيَامَ إِلَى اللَّيْلِ﴾`,
+                    ref: `سورة البقرة: آيتا ١٨٥ و١٨٧`
+                  },
+                  {
+                    type: `السنة النبوية`,
+                    text: `حديث: «صوموا لرؤيته وأفطروا لرؤيته فإن غبي عليكم فأكملوا عدة شعبان ثلاثين»`,
+                    ref: `متفق عليه`
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            id: `ch-sawm-breakers`,
+            title: `باب مفسدات الصيام والأعذار والكفارة`,
+            summary: `ما يوجب القضاء فقط وما يوجب القضاء والكفارة الكبرى`,
+            nodes: [
+              {
+                id: `sawm-mufsids`,
+                title: `مفسدات الصيام والقضاء والكفارة`,
+                ruling: `makruh`,
+                rulingLabel: `مفسدات وموجبات`,
+                definition: `ينقسم الفطر في رمضان إلى: مباح لعذر يوجب القضاء فقط (أو الفدية للعاجز)، ومحرم يوجب القضاء فقط، ومحرم منتهك للحرمة يوجب القضاء والكفارة الكبرى.`,
+                divisions: [
+                  `الأعذار المبيحة للفطر: السفر المباح (مسافة القصر وشرط تبييت نية السفر)، المرض الذي يشق معه الصوم أو يخاف زيادته، الحامل والمرضع إذا خافتا على نفسيهما أو ولديهما (تطعم المرضع مع القضاء)، والشيخ الكبير العاجز (يستحب له الفدية ولا قضاء عليه).`,
+                  `ما يوجب القضاء فقط: الأكل أو الشرب ناسيًا (يجب القضاء في الفرض عند المالكية مع إمساك بقية اليوم)، الاستقاء عمدًا، وصول مائع إلى الحلق من الأنف أو الأذن، وخروج المذي بمباشرة.`,
+                  `ما يوجب القضاء والكفارة الكبرى (بالتعمد والاختيار وانتهاك حرمة رمضان): الجماع عمدًا، الأكل والشرب عمدًا، إخراج المني عمدًا، أو تعمد الفطر بنية الانتهاك.`,
+                  `الكفارة الكبرى عند المالكية: مخيرة على الأصح وأفضلها إطعام ستين مسكينًا (لكل مسكين مد)، أو صيام شهرين متتابعين، أو عتق رقبة مؤمنة.`
+                ],
+                evidences: [
+                  {
+                    type: `القرآن الكريم`,
+                    text: `﴿فَمَن كَانَ مِنكُم مَّرِيضًا أَوْ عَلَىٰ سَفَرٍ فَعِدَّةٌ مِّنْ أَيَّامٍ أُخَرَ﴾`,
+                    ref: `سورة البقرة: آية ١٨٤`
+                  },
+                  {
+                    type: `السنة النبوية`,
+                    text: `حديث الأعرابي الذي واقع أهله في نهار رمضان وأمره النبي ﷺ بالعتق أو صيام شهرين متتابعين أو إطعام ستين مسكينًا`,
+                    ref: `متفق عليه — أخذ المالكية بالتخيير من روايات الموطأ`
+                  }
+                ]
+              },
+              {
+                id: `sawm-nafl-itikaf`,
+                title: `صيام التطوع والأيام المنهي عنها والاعتكاف`,
+                ruling: `mandub`,
+                rulingLabel: `نوافل واعتكاف`,
+                definition: `الاعتكاف: لزوم المسجد لطاعة الله تعالى بصفة مخصوصة، ووقته في المذهب المالكي لا يقل عن يوم وليلة بنية متصلة.`,
+                divisions: [
+                  `صيام التطوع المرغب فيه: يوم عرفة (لغير الحاج)، يوم عاشوراء وتاسوعاء، ستة أيام من شوال، الإثنين والخميس، وثلاثة أيام من كل شهر.`,
+                  `الأيام المنهي عنها: يوما العيدين (حرام)، أيام التشريق الثلاثة (حرام صيامها إلا لمتمتع لم يجد الهدي في اليومين الأولين)، ويوم الشك (يحرم صومه احتياطًا لرمضان).`,
+                  `أركان الاعتكاف: النية، المسجد الجامع (أو كل مسجد إن لم تتخلله جمعة)، الصوم (شرط لصحة الاعتكاف عند المالكية)، والكف عن الجماع ومقدماته؛ ويبطل بالخروج لغير ضرورة شرعية أو طبعية.`
+                ],
+                evidences: [
+                  {
+                    type: `القرآن الكريم`,
+                    text: `﴿وَلَا تُبَاشِرُوهُنَّ وَأَنتُمْ عَاكِفُونَ فِي الْمَسَاجِدِ﴾`,
+                    ref: `سورة البقرة: آية ١٨٧`
+                  },
+                  {
+                    type: `السنة النبوية`,
+                    text: `حديث عائشة: «كان النبي ﷺ يعتكف العشر الأواخر من رمضان حتى توفاه الله»`,
+                    ref: `متفق عليه`
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        id: `book-hajj`,
+        title: `كتاب الحج والعمرة`,
+        theme: `theme-hajj`,
+        subtitle: `الشروط، المواقيت، الأركان، الواجبات، المحظورات، والهدي`,
+        overview: `الركن الخامس من أركان الإسلام، فرض في العمر مرة على المستطيع؛ وتفصل أبوابه في المذهب المالكي الأركان الأربعة التي لا يُجبر تركها بدم، والواجبات التي تُجبر بالدم، وأنواع النسك الثلاثة (الإفراد، القران، والتمتع).`,
+        chapters: [
+          {
+            id: `ch-hajj-conditions`,
+            title: `باب شروط الحج والمواقيت وأنواع النسك`,
+            summary: `الاستطاعة، المواقيت المكانية والزمانية، وأفضل الأنساك عند المالكية`,
+            nodes: [
+              {
+                id: `hajj-shurut`,
+                title: `شروط الحج والمواقيت وأنواع النسك`,
+                ruling: `usul`,
+                rulingLabel: `شروط ومواقيت`,
+                definition: `الحج قصد بيت الله الحرام لأداء مناسك مخصوصة في وقت مخصوص، والعمرة سنة مؤكدة في العمر مرة عند المالكية.`,
+                divisions: [
+                  `شروط الوجوب: الإسلام، البلوغ، العقل، الحرية، والاستطاعة (أمن الطريق، القدرة البدنية والمالية من غير إجحاف، ووجود المحرم أو الرفقة المأمونة للمرأة في الحج الواجب).`,
+                  `المواقيت الزمانية: شوال، ذو القعدة، وعشر ذي الحجة (أو الشهر كله).`,
+                  `المواقيت المكانية: ذو الحليفة (أهل المدينة)، الجحفة (أهل الشام ومصر والمغرب)، قرن المنازل (أهل نجد)، يلملم (أهل اليمن)، وذات عرق (أهل العراق).`,
+                  `أنواع النسك: ١- الإفراد (أفضلها عند المالكية: إحرام بالحج وحده ثم عمرة بعده ولا هدي فيه)، ٢- القران (الإحرام بهما معًا وفيه هدي)، ٣- التمتع (عمرة في أشهر الحج ثم حج من عامه وفيه هدي).`
+                ],
+                evidences: [
+                  {
+                    type: `القرآن الكريم`,
+                    text: `﴿وَلِلَّهِ عَلَى النَّاسِ حِجُّ الْبَيْتِ مَنِ اسْتَطَاعَ إِلَيْهِ سَبِيلًا﴾`,
+                    ref: `سورة آل عمران: آية ٩٧`
+                  },
+                  {
+                    type: `السنة النبوية`,
+                    text: `حديث ابن عباس في توقيت المواقيت: «هن لهن ولمن أتى عليهن من غير أهلهن ممن أراد الحج والعمرة»`,
+                    ref: `متفق عليه`
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            id: `ch-hajj-pillars`,
+            title: `باب أركان الحج والعمرة وواجباتهما`,
+            summary: `الأركان الأربعة للحج، أركان العمرة الثلاثة، والواجبات المجبرة بالدم`,
+            nodes: [
+              {
+                id: `hajj-arkan`,
+                title: `أركان الحج الأربعة وأركان العمرة`,
+                ruling: `fard`,
+                rulingLabel: `أركان لا تُجبر بدم`,
+                definition: `أركان الحج التي يتوقف عليها وجوده ولا تنوب عنها الدماء أربعة، وأركان العمرة ثلاثة (ما عدا الوقوف بعرفة):`,
+                divisions: [
+                  `١. الإحرام: نية الدخول في النسك مع التجرد من المخيط للرجل (ويقترن بالتلبية أو التوجه للمشاعر).`,
+                  `٢. الوقوف بعرفة: جزء من ليلة النحر (العاشر من ذي الحجة) ولو لحظة، والوقوف نهارًا بعد الزوال واجب ينجبر بدم إذا فاته.`,
+                  `٣. طواف الإفاضة: سبعة أشواط حول البيت الحرام طاهرًا من الحدث والخبث ساترًا للعورة.`,
+                  `٤. السعي بين الصفا والمروة: سبعة أشواط تابعة لطواف صحيح (طواف القدوم أو الإفاضة).`
+                ],
+                evidences: [
+                  {
+                    type: `القرآن الكريم`,
+                    text: `﴿ثُمَّ لْيَقْضُوا تَفَثَهُمْ وَلْيُوفُوا نُذُورَهُمْ وَلْيَطَّوَّفُوا بِالْبَيْتِ الْعَتِيقِ﴾`,
+                    ref: `سورة الحج: آية ٢٩`
+                  },
+                  {
+                    type: `السنة النبوية`,
+                    text: `حديث عبد الرحمن بن يعمر: «الحج عرفة، من جاء ليلة جمع قبل طلوع الفجر فقد أدرك الحج»`,
+                    ref: `أخرجه أصحاب السنن`
+                  }
+                ]
+              },
+              {
+                id: `hajj-wajibat`,
+                title: `واجبات الحج (ما يُجبر تركه بدم)`,
+                ruling: `fard`,
+                rulingLabel: `واجبات مجبرة بدم`,
+                definition: `الأعمال الواجبة في الحج التي يصح الحج بدونها ولكن يلزم بتركها عمدًا أو سهوًا دم (شاة):`,
+                divisions: [
+                  `١. الإحرام من الميقات المكاني.`,
+                  `٢. التلبية (مؤكدة مقترنة بالإحرام عند المالكية).`,
+                  `٣. طواف القدوم للمفرد والقارن (عند المالكية واجب يترتب على تركه دم)، والمشي في الطواف والسعي للقادر، وركعتا الطواف الواجب.`,
+                  `٤. النزول بمزدلفة ليلة النحر بقدر حط الرحال (وقيل إلى الفجر).`,
+                  `٥. المبيت بمنى ليالي التشريق (ثلاث ليالٍ أو ليلتين للمتعجل).`,
+                  `٦. رمي الجمرات: جمرة العقبة يوم النحر بسبع حصيات، والجمرات الثلاث أيام التشريق (٢١ حصاة كل يوم).`,
+                  `٧. الحلق أو التقصير (والتحلق للرجال أفضل).`,
+                  `الهدي على المتمتع والقارن (بدنة أو بقرة أو شاة أو سُبع بدنة).`
+                ],
+                evidences: [
+                  {
+                    type: `القرآن الكريم`,
+                    text: `﴿فَمَن تَمَتَّعَ بِالْعُمْرَةِ إِلَى الْحَجِّ فَمَا اسْتَيْسَرَ مِنَ الْهَدْيِ﴾`,
+                    ref: `سورة البقرة: آية ١٩٦`
+                  },
+                  {
+                    type: `السنة النبوية`,
+                    text: `حديث جابر في حجة الوداع: «لتأخذوا عني مناسككم»`,
+                    ref: `رواه مسلم`
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            id: `ch-hajj-prohibitions`,
+            title: `باب محظورات الإحرام والفدية والهدي`,
+            summary: `محظورات الإحرام وما يترتب على ارتكابها من إفساد أو فدية`,
+            nodes: [
+              {
+                id: `hajj-mahzurat`,
+                title: `محظورات الإحرام وأحكام الفدية`,
+                ruling: `makruh`,
+                rulingLabel: `محظورات الإحرام`,
+                definition: `الأمور الممنوعة على المحرم بسبب إحرامه حتى يتحلل التحلل الأصغر (برمي جمرة العقبة يوم النحر) والتحلل الأكبر (بطواف الإفاضة والسعي).`,
+                divisions: [
+                  `١. الجماع ومقدماته: يفسد الحج قبل الوقوف بعرفة أو قبيل طواف الإفاضة، ويلزم المضي في الفاسد والقضاء من قابل مع الهدي.`,
+                  `٢. لبس المخيط المحيط بالعضو وتغطية الرأس للرجل، وتغطية الوجه والقفازين للمرأة (وتسدل على وجهها إذا خشيت نظر الأجانب).`,
+                  `٣. الطيب في البدن أو الثوب، وحلق الشعر أو إزالته، وتقليم الأظافر: وفي كل ذلك الفدية (إطعام ستة مساكين لكل مسكين مدان، أو صيام ثلاثة أيام، أو نسك شاة).`,
+                  `٤. صيد البر المأكول أو الدلالة عليه: وفيه جزاء مثله من النعم أو قيمة الطعام أو صيام.`,
+                  `٥. عقد النكاح: لا ينعقد وهو محرم.`
+                ],
+                evidences: [
+                  {
+                    type: `القرآن الكريم`,
+                    text: `﴿فَمَن فَرَضَ فِيهِنَّ الْحَجَّ فَلَا رَفَثَ وَلَا فُسُوقَ وَلَا جِدَالَ فِي الْحَجِّ﴾`,
+                    ref: `سورة البقرة: آية ١٩٧`
+                  },
+                  {
+                    type: `القرآن الكريم`,
+                    text: `﴿فَمَن كَانَ مِنكُم مَّرِيضًا أَوْ بِهِ أَذًى مِّن رَّأْسِهِ فَفِدْيَةٌ مِّن صِيَامٍ أَوْ صَدَقَةٍ أَوْ نُسُكٍ﴾`,
+                    ref: `سورة البقرة: آية ١٩٦`
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ];
+
+    // Application state
+    const appState = {
+      selectedBookId: `all`,
+      rulingFilter: `all`,
+      searchQuery: ``,
+      viewMode: `tree`,
+      zoomLevel: 1,
+      collapsedChapters: new Set(),
+      activeSelection: { type: `node`, id: `water-def` }
+    };
+
+    // Flatten lookup helpers
+    function getAllNodes() {
+      const list = [];
+      FIQH_DATA.forEach(book => {
+        book.chapters.forEach(ch => {
+          ch.nodes.forEach(node => {
+            list.push({ book, chapter: ch, node });
+          });
+        });
+      });
+      return list;
+    }
+
+    function getRulingDotClass(ruling) {
+      if (ruling === `fard`) return `dot-fard`;
+      if (ruling === `sunnah`) return `dot-sunnah`;
+      if (ruling === `mandub`) return `dot-mandub`;
+      if (ruling === `makruh`) return `dot-makruh`;
+      return `dot-usul`;
+    }
+
+    function getRulingTagClass(ruling) {
+      if (ruling === `fard`) return `tag-fard`;
+      if (ruling === `sunnah` || ruling === `mandub`) return `tag-sunnah`;
+      if (ruling === `makruh`) return `tag-makruh`;
+      return ``;
+    }
+
+    function matchesSearch(node, chapter, book, q) {
+      if (!q) return true;
+      const needle = q.trim().toLowerCase();
+      const haystack = [
+        book.title,
+        chapter.title,
+        chapter.summary,
+        node.title,
+        node.rulingLabel,
+        node.definition,
+        ...(node.divisions || []),
+        ...(node.evidences || []).map(e => `${e.type} ${e.text} ${e.ref}`)
+      ].join(` `).toLowerCase();
+      return haystack.includes(needle);
+    }
+
+    function getFilteredEntries() {
+      const all = getAllNodes();
+      return all.filter(entry => {
+        if (appState.selectedBookId !== `all` && entry.book.id !== appState.selectedBookId) return false;
+        if (appState.rulingFilter !== `all` && entry.node.ruling !== appState.rulingFilter) return false;
+        if (!matchesSearch(entry.node, entry.chapter, entry.book, appState.searchQuery)) return false;
+        return true;
+      });
+    }
+
+    // Render KPI Book Cards
+    function renderKPIs() {
+      const grid = document.getElementById(`kpi-books-grid`);
+      if (!grid) return;
+
+      const totalChapters = FIQH_DATA.reduce((acc, b) => acc + b.chapters.length, 0);
+      const totalNodes = getAllNodes().length;
+      const totalEvidences = getAllNodes().reduce((acc, e) => acc + (e.node.evidences ? e.node.evidences.length : 0), 0);
+
+      let html = `
+        <button type="button" class="arch-card ${appState.selectedBookId === `all` ? `is-featured` : ``}" aria-pressed="${appState.selectedBookId === `all`}" onclick="selectBookFilter('all')">
+          <span class="arch-card-label">شجرة الكتاب كاملة</span>
+          <span class="arch-card-value">${FIQH_DATA.length} كتب</span>
+          <span class="arch-card-caption">${totalChapters} بابًا • ${totalNodes} مسألة • ${totalEvidences} دليلًا</span>
+        </button>
+      `;
+
+      FIQH_DATA.forEach(book => {
+        const chCount = book.chapters.length;
+        const nCount = book.chapters.reduce((sum, ch) => sum + ch.nodes.length, 0);
+        const isSelected = appState.selectedBookId === book.id;
+        html += `
+          <button type="button" class="arch-card ${isSelected ? `is-featured` : ``}" aria-pressed="${isSelected}" onclick="selectBookFilter('${book.id}')">
+            <span class="arch-card-label">كتاب فقهي</span>
+            <span class="arch-card-value">${book.title.replace(`كتاب `, ``)}</span>
+            <span class="arch-card-caption">${chCount} أبواب • ${nCount} محاور</span>
+          </button>
+        `;
+      });
+
+      grid.innerHTML = html;
+
+      const statsEl = document.getElementById(`stats-summary`);
+      if (statsEl) {
+        statsEl.textContent = `إجمالي المحتوى المفهرس: ${FIQH_DATA.length} كتب رئيسية، ${totalChapters} بابًا فقهيًا، ${totalNodes} مسألة تفصيلية، و${totalEvidences} دليلًا شرعيًا.`;
+      }
+    }
+
+    // Render Tree View
+    function renderTree() {
+      const root = document.getElementById(`tree-root`);
+      if (!root) return;
+
+      const filtered = getFilteredEntries();
+      const allowedNodeIds = new Set(filtered.map(e => e.node.id));
+
+      if (filtered.length === 0) {
+        root.innerHTML = `<div class="empty-state">لا توجد مسائل مطابقة لعبارة البحث أو التصفية الحالية. اضغط على «إظهار الكل» لاستعادة الشجرة المعرفية كاملة.</div>`;
+        return;
+      }
+
+      let html = `<div class="mind-tree">`;
+
+      FIQH_DATA.forEach(book => {
+        if (appState.selectedBookId !== `all` && book.id !== appState.selectedBookId) return;
+
+        const visibleChapters = book.chapters.filter(ch => ch.nodes.some(n => allowedNodeIds.has(n.id)));
+        if (visibleChapters.length === 0) return;
+
+        const isBookSelected = appState.activeSelection.type === `book` && appState.activeSelection.id === book.id;
+
+        html += `
+          <div class="book-cluster">
+            <button type="button" class="book-hub ${book.theme} ${isBookSelected ? `is-selected` : ``}" onclick="selectBookNode('${book.id}')">
+              <h3 class="book-hub-title">${book.title}</h3>
+              <span class="book-hub-meta">${visibleChapters.length} أبواب ظاهرة</span>
+            </button>
+            <div class="branches-col">
+        `;
+
+        visibleChapters.forEach(ch => {
+          const visibleNodes = ch.nodes.filter(n => allowedNodeIds.has(n.id));
+          const isCollapsed = appState.collapsedChapters.has(ch.id) && !appState.searchQuery;
+          const isChapterSelected = appState.activeSelection.type === `chapter` && appState.activeSelection.id === ch.id;
+
+          html += `
+            <div class="branch-row">
+              <div class="chapter-node ${isChapterSelected ? `is-selected` : ``}" onclick="selectChapterNode('${book.id}', '${ch.id}')" role="button" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();selectChapterNode('${book.id}', '${ch.id}');}">
+                <div class="chapter-node-head">
+                  <span class="chapter-node-title">${ch.title}</span>
+                  <button type="button" class="chapter-toggle" aria-expanded="${!isCollapsed}" aria-label="طي أو توسيع ${ch.title}" onclick="event.stopPropagation(); toggleChapter('${ch.id}')">
+                    ${isCollapsed ? `+` : `−`}
+                  </button>
+                </div>
+                <span class="chapter-node-summary">${ch.summary}</span>
+              </div>
+              <div class="leaves-grid" ${isCollapsed ? `hidden` : ``}>
+          `;
+
+          visibleNodes.forEach(node => {
+            const isSelected = appState.activeSelection.type === `node` && appState.activeSelection.id === node.id;
+            html += `
+              <button type="button" class="leaf-chip ${isSelected ? `is-selected` : ``}" onclick="selectLeafNode('${node.id}')">
+                <span class="ruling-dot ${getRulingDotClass(node.ruling)}" aria-hidden="true"></span>
+                <span>${node.title}</span>
+              </button>
+            `;
+          });
+
+          html += `
+              </div>
+            </div>
+          `;
+        });
+
+        html += `
+            </div>
+          </div>
+        `;
+      });
+
+      html += `</div>`;
+      root.innerHTML = html;
+      root.style.transform = `scale(${appState.zoomLevel})`;
+    }
+
+    // Render Table View
+    function renderTable() {
+      const tbody = document.getElementById(`table-body`);
+      if (!tbody) return;
+
+      const filtered = getFilteredEntries();
+      if (filtered.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="5" class="empty-state">لا توجد نتائج مطابقة للبحث أو التصفية الحالية.</td></tr>`;
+        return;
+      }
+
+      tbody.innerHTML = filtered.map(({ book, chapter, node }) => {
+        const firstEvidence = node.evidences && node.evidences[0]
+          ? `${node.evidences[0].text} (${node.evidences[0].ref})`
+          : `—`;
+        return `
+          <tr onclick="selectLeafNode('${node.id}')" tabindex="0" onkeydown="if(event.key==='Enter'){selectLeafNode('${node.id}');}">
+            <td><strong>${book.title}</strong></td>
+            <td>${chapter.title}</td>
+            <td>${node.title}</td>
+            <td><span class="fiqh-tag ${getRulingTagClass(node.ruling)}">${node.rulingLabel}</span></td>
+            <td>${firstEvidence}</td>
+          </tr>
+        `;
+      }).join(``);
+    }
+
+    // Render Detail Inspector
+    function renderInspector() {
+      const container = document.getElementById(`inspector-body`);
+      const badge = document.getElementById(`inspector-count-badge`);
+      if (!container) return;
+
+      const sel = appState.activeSelection;
+
+      if (sel.type === `book`) {
+        const book = FIQH_DATA.find(b => b.id === sel.id);
+        if (!book) return;
+        if (badge) badge.textContent = `${book.chapters.length} أبواب`;
+        container.innerHTML = `
+          <div class="breadcrumb-trail">الوجيز في فقه العبادات ◂ ${book.title}</div>
+          <h3 class="detail-heading">${book.title}</h3>
+          <div class="detail-block">
+            <h4 class="detail-block-title">مدخل الكتاب ومقاصده</h4>
+            <p>${book.overview}</p>
+          </div>
+          <div class="detail-block">
+            <h4 class="detail-block-title">أبواب هذا الكتاب</h4>
+            <ul class="detail-list">
+              ${book.chapters.map(c => `<li><strong>${c.title}:</strong> ${c.summary}</li>`).join(``)}
+            </ul>
+          </div>
+        `;
+        return;
+      }
+
+      if (sel.type === `chapter`) {
+        let foundBook = null;
+        let foundCh = null;
+        FIQH_DATA.forEach(b => {
+          const ch = b.chapters.find(c => c.id === sel.id);
+          if (ch) { foundBook = b; foundCh = ch; }
+        });
+        if (!foundCh) return;
+        if (badge) badge.textContent = `${foundCh.nodes.length} محاور`;
+        container.innerHTML = `
+          <div class="breadcrumb-trail">${foundBook.title} ◂ ${foundCh.title}</div>
+          <h3 class="detail-heading">${foundCh.title}</h3>
+          <div class="detail-block">
+            <h4 class="detail-block-title">ملخص الباب</h4>
+            <p>${foundCh.summary}</p>
+          </div>
+          <div class="detail-block">
+            <h4 class="detail-block-title">المسائل المندرجة تحت الباب (اضغط للاستعراض)</h4>
+            <div class="tag-row" style="margin-top: var(--space-xs);">
+              ${foundCh.nodes.map(n => `
+                <button type="button" class="leaf-chip" onclick="selectLeafNode('${n.id}')">
+                  <span class="ruling-dot ${getRulingDotClass(n.ruling)}" aria-hidden="true"></span>
+                  <span>${n.title}</span>
+                </button>
+              `).join(``)}
+            </div>
+          </div>
+        `;
+        return;
+      }
+
+      // Default: leaf node
+      const entry = getAllNodes().find(e => e.node.id === sel.id) || getAllNodes()[0];
+      if (!entry) return;
+      const { book, chapter, node } = entry;
+      if (badge) badge.textContent = `${node.evidences ? node.evidences.length : 0} أدلة شرعية`;
+
+      container.innerHTML = `
+        <div class="breadcrumb-trail">${book.title} ◂ ${chapter.title}</div>
+        <h3 class="detail-heading">${node.title}</h3>
+        <div class="tag-row">
+          <span class="fiqh-tag ${getRulingTagClass(node.ruling)}">${node.rulingLabel}</span>
+          <span class="fiqh-tag">المشهور في المذهب المالكي</span>
+        </div>
+
+        <div class="detail-block">
+          <h4 class="detail-block-title">التعريف والتأصيل الفقهي</h4>
+          <p>${node.definition}</p>
+        </div>
+
+        <div class="detail-block">
+          <h4 class="detail-block-title">التقسيمات والتفريعات والأحكام</h4>
+          <ul class="detail-list">
+            ${(node.divisions || []).map(item => `<li>${item}</li>`).join(``)}
+          </ul>
+        </div>
+
+        <div class="detail-block">
+          <h4 class="detail-block-title">النصوص والأدلة الشرعية التفصيلية</h4>
+          <div style="display:flex; flex-direction:column; gap: var(--space-sm); margin-top: var(--space-xs);">
+            ${(node.evidences || []).map(ev => `
+              <div class="evidence-card">
+                <span class="evidence-type">${ev.type}</span>
+                <p class="evidence-text">${ev.text}</p>
+                <span class="evidence-ref">${ev.ref}</span>
+              </div>
+            `).join(``)}
+          </div>
+        </div>
+      `;
+    }
+
+    function renderAll() {
+      renderKPIs();
+      if (appState.viewMode === `tree`) {
+        renderTree();
+      } else {
+        renderTable();
+      }
+      renderInspector();
+    }
+
+    // Hoisted Event Handlers
+    function selectBookFilter(bookId) {
+      appState.selectedBookId = bookId;
+      if (bookId !== `all`) {
+        appState.activeSelection = { type: `book`, id: bookId };
+      }
+      renderAll();
+    }
+
+    function selectBookNode(bookId) {
+      appState.activeSelection = { type: `book`, id: bookId };
+      renderTree();
+      renderInspector();
+    }
+
+    function selectChapterNode(bookId, chapterId) {
+      appState.activeSelection = { type: `chapter`, id: chapterId };
+      renderTree();
+      renderInspector();
+    }
+
+    function selectLeafNode(nodeId) {
+      appState.activeSelection = { type: `node`, id: nodeId };
+      if (appState.viewMode === `tree`) {
+        renderTree();
+      }
+      renderInspector();
+    }
+
+    function toggleChapter(chapterId) {
+      if (appState.collapsedChapters.has(chapterId)) {
+        appState.collapsedChapters.delete(chapterId);
+      } else {
+        appState.collapsedChapters.add(chapterId);
+      }
+      renderTree();
+    }
+
+    function expandAllBranches() {
+      appState.collapsedChapters.clear();
+      renderTree();
+    }
+
+    function collapseAllBranches() {
+      FIQH_DATA.forEach(b => b.chapters.forEach(c => appState.collapsedChapters.add(c.id)));
+      renderTree();
+    }
+
+    function zoomTree(delta) {
+      appState.zoomLevel = Math.min(1.4, Math.max(0.65, Number((appState.zoomLevel + delta).toFixed(2))));
+      const root = document.getElementById(`tree-root`);
+      const readout = document.getElementById(`zoom-readout`);
+      if (root) root.style.transform = `scale(${appState.zoomLevel})`;
+      if (readout) readout.textContent = `${Math.round(appState.zoomLevel * 100)}%`;
+    }
+
+    function resetZoom() {
+      appState.zoomLevel = 1;
+      const root = document.getElementById(`tree-root`);
+      const readout = document.getElementById(`zoom-readout`);
+      if (root) root.style.transform = `scale(1)`;
+      if (readout) readout.textContent = `100%`;
+    }
+
+    function handleSearchInput(val) {
+      appState.searchQuery = val || ``;
+      renderAll();
+    }
+
+    function handleRulingFilter(val) {
+      appState.rulingFilter = val || `all`;
+      renderAll();
+    }
+
+    function switchView(mode) {
+      appState.viewMode = mode;
+      const treeEl = document.getElementById(`tree-view-container`);
+      const tableEl = document.getElementById(`table-view-container`);
+      const toolbar = document.getElementById(`tree-toolbar`);
+      const btnTree = document.getElementById(`btn-view-tree`);
+      const btnTable = document.getElementById(`btn-view-table`);
+      const titleEl = document.getElementById(`canvas-title`);
+
+      if (mode === `tree`) {
+        if (treeEl) treeEl.hidden = false;
+        if (tableEl) tableEl.hidden = true;
+        if (toolbar) toolbar.style.display = `flex`;
+        if (btnTree) btnTree.setAttribute(`aria-pressed`, `true`);
+        if (btnTable) btnTable.setAttribute(`aria-pressed`, `false`);
+        if (titleEl) titleEl.textContent = `الشجرة المعرفية لأبواب العبادات`;
+      } else {
+        if (treeEl) treeEl.hidden = true;
+        if (tableEl) tableEl.hidden = false;
+        if (toolbar) toolbar.style.display = `none`;
+        if (btnTree) btnTree.setAttribute(`aria-pressed`, `false`);
+        if (btnTable) btnTable.setAttribute(`aria-pressed`, `true`);
+        if (titleEl) titleEl.textContent = `فهرس المسائل والأدلة الشرعية`;
+      }
+      renderAll();
+    }
+
+    function resetAllFilters() {
+      appState.selectedBookId = `all`;
+      appState.rulingFilter = `all`;
+      appState.searchQuery = ``;
+      appState.collapsedChapters.clear();
+      const searchEl = document.getElementById(`search-input`);
+      const selectEl = document.getElementById(`ruling-filter`);
+      if (searchEl) searchEl.value = ``;
+      if (selectEl) selectEl.value = `all`;
+      resetZoom();
+      renderAll();
+    }
+
+    // Initialize on DOMContentLoaded
+    document.addEventListener(`DOMContentLoaded`, function () {
+      renderAll();
+      if (typeof lucide !== `undefined` && lucide.createIcons) {
+        lucide.createIcons();
+      }
+    });
+  </script>
+</body>
+</html>
